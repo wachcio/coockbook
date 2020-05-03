@@ -13,16 +13,38 @@ export default {
     },
     components: {},
     methods: {
-        ...mapMutations(['updateRecipes', 'updateCategiories']),
-        ...mapActions(['getRecipesJSON', 'getCategoriesJSON']),
+        ...mapMutations([
+            'updateRecipes',
+            'updateRecipesID',
+            'updateRecipesByCategory',
+            'updateCategiories',
+            'updateCategioriesID',
+        ]),
+        ...mapActions([
+            'getRecipesJSON',
+            'getRecipesIDJSON',
+            'getRecipesByCategoryJSON',
+            'getCategoriesJSON',
+            'getCategoriesIDJSON',
+        ]),
 
         refreshData() {
             this.$store.dispatch('getRecipesJSON');
+            this.$store.dispatch('getRecipesIDJSON', 2);
+            this.$store.dispatch('getRecipesByCategoryJSON');
             this.$store.dispatch('getCategoriesJSON');
+            this.$store.dispatch('getCategoriesIDJSON', 2);
         },
     },
     computed: {
-        ...mapState(['endpoints', 'recipes', 'showInfo']),
+        ...mapState([
+            'endpoints',
+            'recipes',
+            'recipesID',
+            'recipesByCategory',
+            'categories',
+            'categoriesID',
+        ]),
         ...mapGetters([]),
     },
     created() {

@@ -10,11 +10,9 @@ export default new Vuex.Store({
         endpoints: {
             // baseAPIurl: 'http://cookbookapi.wachcio.pl/',
             baseAPIurl: 'http://localhost:8000/',
-            recipes: 'recipes',
-            recipesID: 'recipes/',
+            recipes: 'recipes/',
             recipesByCategory: 'recipes_by_category',
-            categories: 'categories',
-            categoriesID: 'categories/',
+            categories: 'categories/',
         },
         recipes: {},
         recipesID: {},
@@ -41,8 +39,17 @@ export default new Vuex.Store({
         updateRecipes(state, payload) {
             state.recipes = payload;
         },
+        updateRecipesID(state, payload) {
+            state.recipesID = payload;
+        },
+        updateRecipesByCategory(state, payload) {
+            state.recipesByCategory = payload;
+        },
         updateCategories(state, payload) {
             state.categories = payload;
+        },
+        updateCategoriesID(state, payload) {
+            state.categoriesID = payload;
         },
     },
     actions: {
@@ -57,6 +64,26 @@ export default new Vuex.Store({
                 )
                 .then((res) => context.commit('updateRecipes', res.data));
         },
+        getRecipesIDJSON(context, ID) {
+            // context.commit("isLoadedChange", false);
+
+            axios
+                .get(
+                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.recipes}${ID}`
+                )
+                .then((res) => context.commit('updateRecipesID', res.data));
+        },
+        getRecipesByCategoryJSON(context) {
+            // context.commit("isLoadedChange", false);
+
+            axios
+                .get(
+                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.recipesByCategory}`
+                )
+                .then((res) =>
+                    context.commit('updateRecipesByCategory', res.data)
+                );
+        },
         getCategoriesJSON(context) {
             // context.commit("isLoadedChange", false);
 
@@ -65,6 +92,15 @@ export default new Vuex.Store({
                     `${context.state.endpoints.baseAPIurl}${context.state.endpoints.categories}`
                 )
                 .then((res) => context.commit('updateCategories', res.data));
+        },
+        getCategoriesIDJSON(context, ID) {
+            // context.commit("isLoadedChange", false);
+
+            axios
+                .get(
+                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.categories}${ID}`
+                )
+                .then((res) => context.commit('updateCategoriesID', res.data));
         },
     },
 });
