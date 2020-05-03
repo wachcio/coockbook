@@ -3,16 +3,25 @@ import Vuex from 'vuex';
 import axios from 'axios';
 // import _ from 'lodash';
 
+axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
+// axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    // 'X-CSRF-TOKEN': 'meta[name="csrf-token"]'.attr('content'),
+};
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         endpoints: {
-            // baseAPIurl: 'http://cookbookapi.wachcio.pl/',
-            baseAPIurl: 'http://localhost:8000/',
-            recipes: 'recipes/',
+            recipes: 'recipes',
+            recipesID: 'recipes/',
             recipesByCategory: 'recipes_by_category',
-            categories: 'categories/',
+            categories: 'categories',
+            categoriesID: 'categories/',
         },
         recipes: {},
         recipesID: {},
@@ -51,6 +60,9 @@ export default new Vuex.Store({
         updateCategoriesID(state, payload) {
             state.categoriesID = payload;
         },
+        getResponse(state, payload) {
+            console.log(payload);
+        },
     },
     actions: {
         // Akcje są asynhroniczne np do JSON-a
@@ -59,27 +71,23 @@ export default new Vuex.Store({
             // context.commit("isLoadedChange", false);
 
             axios
-                .get(
-                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.recipes}`
-                )
+                .get(`${context.state.endpoints.recipes}`)
+
                 .then((res) => context.commit('updateRecipes', res.data));
         },
         getRecipesIDJSON(context, ID) {
             // context.commit("isLoadedChange", false);
 
             axios
-                .get(
-                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.recipes}${ID}`
-                )
+                .get(`${context.state.endpoints.recipesID}${ID}`)
+                // .then((res) => context.commit('getResponse', res.config))
                 .then((res) => context.commit('updateRecipesID', res.data));
         },
         getRecipesByCategoryJSON(context) {
             // context.commit("isLoadedChange", false);
 
             axios
-                .get(
-                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.recipesByCategory}`
-                )
+                .get(`${context.state.endpoints.recipesByCategory}`)
                 .then((res) =>
                     context.commit('updateRecipesByCategory', res.data)
                 );
@@ -88,18 +96,14 @@ export default new Vuex.Store({
             // context.commit("isLoadedChange", false);
 
             axios
-                .get(
-                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.categories}`
-                )
+                .get(`${context.state.endpoints.categories}`)
                 .then((res) => context.commit('updateCategories', res.data));
         },
         getCategoriesIDJSON(context, ID) {
             // context.commit("isLoadedChange", false);
 
             axios
-                .get(
-                    `${context.state.endpoints.baseAPIurl}${context.state.endpoints.categories}${ID}`
-                )
+                .get(`${context.state.endpoints.categoriesID}${ID}`)
                 .then((res) => context.commit('updateCategoriesID', res.data));
         },
     },

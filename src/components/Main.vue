@@ -33,7 +33,7 @@ export default {
             this.$store.dispatch('getRecipesIDJSON', 2);
             this.$store.dispatch('getRecipesByCategoryJSON');
             this.$store.dispatch('getCategoriesJSON');
-            this.$store.dispatch('getCategoriesIDJSON', 2);
+            this.$store.dispatch('getCategoriesIDJSON', 3);
         },
     },
     computed: {
