@@ -3,7 +3,7 @@
 </template>
 
 <script>
-// import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'Main',
@@ -12,9 +12,22 @@ export default {
         return {};
     },
     components: {},
-    methods: {},
-    computed: {},
-    created() {},
+    methods: {
+        ...mapMutations(['updateRecipes', 'updateCategiories']),
+        ...mapActions(['getRecipesJSON', 'getCategoriesJSON']),
+
+        refreshData() {
+            this.$store.dispatch('getRecipesJSON');
+            this.$store.dispatch('getCategoriesJSON');
+        },
+    },
+    computed: {
+        ...mapState(['endpoints', 'recipes', 'showInfo']),
+        ...mapGetters([]),
+    },
+    created() {
+        this.refreshData();
+    },
     watch: {},
 };
 </script>
