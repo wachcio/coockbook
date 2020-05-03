@@ -34,6 +34,8 @@ export default {
             this.$store.dispatch('getRecipesByCategoryJSON');
             this.$store.dispatch('getCategoriesJSON');
             this.$store.dispatch('getCategoriesIDJSON', 3);
+            //Dodanie kategorii do bazy poprawne
+            // this.$store.dispatch('addCategory', 'łakocie');
         },
     },
     computed: {

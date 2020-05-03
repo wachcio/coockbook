@@ -63,6 +63,9 @@ export default new Vuex.Store({
         getResponse(state, payload) {
             console.log(payload);
         },
+        addCategory(state, payload) {
+            state.categories = { ...state.categories, payload };
+        },
     },
     actions: {
         // Akcje są asynhroniczne np do JSON-a
@@ -105,6 +108,14 @@ export default new Vuex.Store({
             axios
                 .get(`${context.state.endpoints.categoriesID}${ID}`)
                 .then((res) => context.commit('updateCategoriesID', res.data));
+        },
+        //add routes
+        addCategory(context, name) {
+            axios
+                .post(`${context.state.endpoints.categories}`, {
+                    category_name: name,
+                })
+                .then(() => context.commit('addCategory', name));
         },
     },
 });
