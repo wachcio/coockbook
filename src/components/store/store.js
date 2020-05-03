@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 // import _ from 'lodash';
 
-axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
-// axios.defaults.baseURL = 'http://localhost:8000/';
+// axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
+axios.defaults.baseURL = 'http://localhost:8000/';
 axios.defaults.headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -45,19 +45,19 @@ export default new Vuex.Store({
         // Mutacje synhroniczne
         // W komponencie do zmiany w state będzie służyła funkcja w methods
 
-        updateRecipes(state, payload) {
+        getRecipes(state, payload) {
             state.recipes = payload;
         },
-        updateRecipesID(state, payload) {
+        getRecipesID(state, payload) {
             state.recipesID = payload;
         },
-        updateRecipesByCategory(state, payload) {
+        getRecipesByCategory(state, payload) {
             state.recipesByCategory = payload;
         },
-        updateCategories(state, payload) {
+        getCategories(state, payload) {
             state.categories = payload;
         },
-        updateCategoriesID(state, payload) {
+        getCategoriesID(state, payload) {
             state.categoriesID = payload;
         },
         getResponse(state, payload) {
@@ -65,6 +65,17 @@ export default new Vuex.Store({
         },
         addCategory(state, payload) {
             state.categories = { ...state.categories, payload };
+        },
+
+        addRecipes(state, payload) {
+            state.recipes = { ...state.recipes, payload };
+        },
+        update2Category(state, payload) {
+            state.categories = { ...state.categories, payload };
+        },
+
+        update2Recipes(state, payload) {
+            state.recipes = { ...state.recipes, payload };
         },
     },
     actions: {
@@ -76,7 +87,7 @@ export default new Vuex.Store({
             axios
                 .get(`${context.state.endpoints.recipes}`)
 
-                .then((res) => context.commit('updateRecipes', res.data));
+                .then((res) => context.commit('getRecipes', res.data));
         },
         getRecipesIDJSON(context, ID) {
             // context.commit("isLoadedChange", false);
@@ -84,7 +95,7 @@ export default new Vuex.Store({
             axios
                 .get(`${context.state.endpoints.recipesID}${ID}`)
                 // .then((res) => context.commit('getResponse', res.config))
-                .then((res) => context.commit('updateRecipesID', res.data));
+                .then((res) => context.commit('getRecipesID', res.data));
         },
         getRecipesByCategoryJSON(context) {
             // context.commit("isLoadedChange", false);
@@ -92,7 +103,7 @@ export default new Vuex.Store({
             axios
                 .get(`${context.state.endpoints.recipesByCategory}`)
                 .then((res) =>
-                    context.commit('updateRecipesByCategory', res.data)
+                    context.commit('getRecipesByCategory', res.data)
                 );
         },
         getCategoriesJSON(context) {
@@ -100,14 +111,14 @@ export default new Vuex.Store({
 
             axios
                 .get(`${context.state.endpoints.categories}`)
-                .then((res) => context.commit('updateCategories', res.data));
+                .then((res) => context.commit('getCategories', res.data));
         },
         getCategoriesIDJSON(context, ID) {
             // context.commit("isLoadedChange", false);
 
             axios
                 .get(`${context.state.endpoints.categoriesID}${ID}`)
-                .then((res) => context.commit('updateCategoriesID', res.data));
+                .then((res) => context.commit('getCategoriesID', res.data));
         },
         //add routes
         addCategory(context, name) {
@@ -116,6 +127,39 @@ export default new Vuex.Store({
                     category_name: name,
                 })
                 .then(() => context.commit('addCategory', name));
+        },
+        addRecipes(context, recipes) {
+            axios
+                .post(`${context.state.endpoints.recipes}`, {
+                    name: recipes.name,
+                    ingredients: recipes.ingredients,
+                    execution: recipes.execution,
+                    picture: recipes.picture,
+                    rating: recipes.rating,
+                    category_id: recipes.category_id,
+                })
+                .then(() => context.commit('addRecipes', recipes));
+        },
+        updateCategory(context, data) {
+            axios
+                .put(`${context.state.endpoints.categoriesID}${data.ID}`, {
+                    category_name: data.category_name,
+                })
+                .then(() =>
+                    context.commit('update2Category', data.category_name)
+                );
+        },
+        updateRecipes(context, recipes) {
+            axios
+                .put(`${context.state.endpoints.recipesID}${recipes.ID}`, {
+                    name: recipes.name,
+                    ingredients: recipes.ingredients,
+                    execution: recipes.execution,
+                    picture: recipes.picture,
+                    rating: recipes.rating,
+                    category_id: recipes.category_id,
+                })
+                .then(() => context.commit('update2Recipes', recipes));
         },
     },
 });
