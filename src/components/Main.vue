@@ -62,7 +62,7 @@ export default {
             //     ID: 44,
             // });
             //usuwanie kategorii
-            // this.$store.dispatch('deleteRecipes', 43);
+            // this.$store.dispatch('deleteRecipes', 42);
             //usuwanie przepisu
             // this.$store.dispatch('deleteCategory', 16);
         },
