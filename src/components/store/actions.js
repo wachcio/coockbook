@@ -59,6 +59,8 @@ export default {
                     statusCode: e.response.status,
                     type: 'error',
                     msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
                 })
             );
     },
