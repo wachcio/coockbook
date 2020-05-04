@@ -1,7 +1,8 @@
 <template>
     <div class="wrapper">
         <h1>Książka kucharska</h1>
-        <button @click="addCategory('kategoria4')">Dodaj kategorię</button>
+        <button @click="addCategory()">Dodaj kategorię</button>
+        <button @click="addRecipes()">Dodaj przepis</button>
     </div>
 </template>
 
@@ -12,7 +13,17 @@ export default {
     name: 'Main',
     props: {},
     data() {
-        return {};
+        return {
+            newRecipes: {
+                name: 'dżem śliwkowy',
+                ingredients: 'składniki',
+                execution: 'wykonanie',
+                picture: 'obraz',
+                rating: 'ocena',
+                category_id: '1,2,3',
+            },
+            newCategory: 'przetwory',
+        };
     },
     components: {},
     methods: {
@@ -31,21 +42,16 @@ export default {
             'getCategoriesIDJSON',
         ]),
 
-        refreshData() {
-            this.$store.dispatch('getRecipesJSON');
-            this.$store.dispatch('getRecipesIDJSON', 2);
-            this.$store.dispatch('getRecipesByCategoryJSON');
-            this.$store.dispatch('getCategoriesJSON');
-            this.$store.dispatch('getCategoriesIDJSON', 3);
-
-            // this.$store.dispatch('addRecipes', {
-            //     name: 'gofry6',
-            //     ingredients: 'składniki do gofrów',
-            //     execution: 'przepis na gofry',
-            //     picture: 'zdjęcie',
-            //     rating: 5,
-            //     category_id: '1, 2',
-            // });
+        refreshData(type = 'all') {
+            if (type == 'recipes' || type == 'all') {
+                this.$store.dispatch('getRecipesJSON');
+                // this.$store.dispatch('getRecipesIDJSON', 2);
+                this.$store.dispatch('getRecipesByCategoryJSON');
+            }
+            if (type == 'categories' || type == 'all') {
+                this.$store.dispatch('getCategoriesJSON');
+                // this.$store.dispatch('getCategoriesIDJSON', 3);
+            } else this.refreshData();
         },
 
         //Dodanie przepisu
@@ -77,9 +83,16 @@ export default {
         // this.$store.dispatch('deleteRecipes', 42);
         //usuwanie przepisu
         // this.$store.dispatch('deleteCategory', 16);
-        addCategory(category) {
+        addCategory() {
             //Dodanie kategorii do bazy poprawne
-            this.$store.dispatch('addCategory', category);
+            this.$store.dispatch('addCategory', {
+                category_name: this.newCategory,
+            });
+            this.refreshData('recipes');
+        },
+        addRecipes() {
+            this.$store.dispatch('addRecipes', this.newRecipes);
+            this.refreshData('categories');
         },
     },
     computed: {
@@ -94,7 +107,7 @@ export default {
         ...mapGetters([]),
     },
     created() {
-        this.refreshData();
+        this.refreshData('aaa');
     },
     watch: {},
 };
