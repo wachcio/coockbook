@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 // import _ from 'lodash';
 
-axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
-// axios.defaults.baseURL = 'http://localhost:8000/';
+// axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
+axios.defaults.baseURL = 'http://localhost:8000/';
 axios.defaults.headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -28,6 +28,7 @@ export default new Vuex.Store({
         recipesByCategory: {},
         categories: {},
         categoriesID: {},
+        operationStatus: {},
     },
 
     getters: {
@@ -64,11 +65,11 @@ export default new Vuex.Store({
             console.log(payload);
         },
         addCategory(state, payload) {
-            state.categories = { ...state.categories, payload };
+            state.operationStatus = payload;
         },
 
         addRecipes(state, payload) {
-            state.recipes = { ...state.recipes, payload };
+            state.operationStatus = payload;
         },
         updateCategory(state, payload) {
             state.categories = { ...state.categories, payload };
@@ -120,16 +121,29 @@ export default new Vuex.Store({
                 .get(`${context.state.endpoints.categoriesID}${ID}`)
                 .then((res) => context.commit('getCategoriesID', res.data));
         },
-        //add routes
+
         addCategory(context, name) {
-            axios
+            return axios
                 .post(`${context.state.endpoints.categories}`, {
                     category_name: name,
                 })
-                .then(() => context.commit('addCategory', name));
+                .then((res) =>
+                    context.commit('addCategory', {
+                        statusCode: 200,
+                        type: 'success',
+                        msg: res.statusText,
+                    })
+                )
+                .catch((e) =>
+                    context.commit('addCategory', {
+                        statusCode: e.response.status,
+                        type: 'error',
+                        msg: e.response.data.error,
+                    })
+                );
         },
         addRecipes(context, recipes) {
-            axios
+            return axios
                 .post(`${context.state.endpoints.recipes}`, {
                     name: recipes.name,
                     ingredients: recipes.ingredients,
@@ -138,7 +152,20 @@ export default new Vuex.Store({
                     rating: recipes.rating,
                     category_id: recipes.category_id,
                 })
-                .then(() => context.commit('addRecipes', recipes));
+                .then((res) =>
+                    context.commit('addRecipes', {
+                        statusCode: 200,
+                        type: 'success',
+                        msg: res.statusText,
+                    })
+                )
+                .catch((e) =>
+                    context.commit('addRecipes', {
+                        statusCode: e.response.status,
+                        type: 'error',
+                        msg: e.response.data.error,
+                    })
+                );
         },
         updateCategory(context, data) {
             axios

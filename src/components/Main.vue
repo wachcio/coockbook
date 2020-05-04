@@ -1,5 +1,8 @@
 <template>
-    <div class="wrapper"><h1>Książka kucharska</h1></div>
+    <div class="wrapper">
+        <h1>Książka kucharska</h1>
+        <button @click="addCategory('kategoria4')">Dodaj kategorię</button>
+    </div>
 </template>
 
 <script>
@@ -34,37 +37,49 @@ export default {
             this.$store.dispatch('getRecipesByCategoryJSON');
             this.$store.dispatch('getCategoriesJSON');
             this.$store.dispatch('getCategoriesIDJSON', 3);
-            //Dodanie kategorii do bazy poprawne
-            // this.$store.dispatch('addCategory', 'łakocie');
-            //Dodanie przepisu
+
             // this.$store.dispatch('addRecipes', {
-            //     name: 'gofry2',
+            //     name: 'gofry6',
             //     ingredients: 'składniki do gofrów',
             //     execution: 'przepis na gofry',
             //     picture: 'zdjęcie',
             //     rating: 5,
-            //     category_id: '16, 34',
+            //     category_id: '1, 2',
             // });
+        },
 
-            // Aktualizacja kategorii do bazy poprawne
-            // this.$store.dispatch('updateCategory', {
-            //     category_name: 'łakocie2',
-            //     ID: 34,
-            // });
-            // Aktualizacja przepisu
-            // this.$store.dispatch('updateRecipes', {
-            //     name: 'gofry5',
-            //     ingredients: 'składniki do gofrów',
-            //     execution: 'przepis na gofry',
-            //     picture: 'zdjęcie',
-            //     rating: 4,
-            //     category_id: '16, 34, 2',
-            //     ID: 44,
-            // });
-            //usuwanie kategorii
-            // this.$store.dispatch('deleteRecipes', 42);
-            //usuwanie przepisu
-            // this.$store.dispatch('deleteCategory', 16);
+        //Dodanie przepisu
+        // this.$store.dispatch('addRecipes', {
+        //     name: 'gofry2',
+        //     ingredients: 'składniki do gofrów',
+        //     execution: 'przepis na gofry',
+        //     picture: 'zdjęcie',
+        //     rating: 5,
+        //     category_id: '16, 34',
+        // });
+
+        // Aktualizacja kategorii do bazy poprawne
+        // this.$store.dispatch('updateCategory', {
+        //     category_name: 'łakocie2',
+        //     ID: 34,
+        // });
+        // Aktualizacja przepisu
+        // this.$store.dispatch('updateRecipes', {
+        //     name: 'gofry5',
+        //     ingredients: 'składniki do gofrów',
+        //     execution: 'przepis na gofry',
+        //     picture: 'zdjęcie',
+        //     rating: 4,
+        //     category_id: '16, 34, 2',
+        //     ID: 44,
+        // });
+        //usuwanie kategorii
+        // this.$store.dispatch('deleteRecipes', 42);
+        //usuwanie przepisu
+        // this.$store.dispatch('deleteCategory', 16);
+        addCategory(category) {
+            //Dodanie kategorii do bazy poprawne
+            this.$store.dispatch('addCategory', category);
         },
     },
     computed: {
