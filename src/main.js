@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import 'es6-promise/auto';
 import routes from './components/routes/routes.js';
-import store from './components/store/store';
+import store from './components/store/store.js';
 
 const router = new VueRouter({
     // model: 'history',

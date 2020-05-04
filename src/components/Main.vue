@@ -54,16 +54,6 @@ export default {
             } else this.refreshData();
         },
 
-        //Dodanie przepisu
-        // this.$store.dispatch('addRecipes', {
-        //     name: 'gofry2',
-        //     ingredients: 'składniki do gofrów',
-        //     execution: 'przepis na gofry',
-        //     picture: 'zdjęcie',
-        //     rating: 5,
-        //     category_id: '16, 34',
-        // });
-
         // Aktualizacja kategorii do bazy poprawne
         // this.$store.dispatch('updateCategory', {
         //     category_name: 'łakocie2',
