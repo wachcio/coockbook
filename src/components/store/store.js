@@ -70,11 +70,11 @@ export default new Vuex.Store({
         addRecipes(state, payload) {
             state.recipes = { ...state.recipes, payload };
         },
-        update2Category(state, payload) {
+        updateCategory(state, payload) {
             state.categories = { ...state.categories, payload };
         },
 
-        update2Recipes(state, payload) {
+        updateRecipes(state, payload) {
             state.recipes = { ...state.recipes, payload };
         },
     },
@@ -146,7 +146,7 @@ export default new Vuex.Store({
                     category_name: data.category_name,
                 })
                 .then(() =>
-                    context.commit('update2Category', data.category_name)
+                    context.commit('updateCategory', data.category_name)
                 );
         },
         updateRecipes(context, recipes) {
@@ -159,7 +159,19 @@ export default new Vuex.Store({
                     rating: recipes.rating,
                     category_id: recipes.category_id,
                 })
-                .then(() => context.commit('update2Recipes', recipes));
+                .then(() => context.commit('updateRecipes', recipes));
+        },
+        deleteRecipes(context, ID) {
+            // context.commit("isLoadedChange", false);
+
+            axios.delete(`${context.state.endpoints.recipesID}${ID}`);
+            // .then((res) => context.commit('deleteRecipes', res.data));
+        },
+        deleteCategory(context, ID) {
+            // context.commit("isLoadedChange", false);
+
+            axios.delete(`${context.state.endpoints.categoriesID}${ID}`);
+            // .then((res) => context.commit('deleteCategory', res.data));
         },
     },
 });

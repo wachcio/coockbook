@@ -61,6 +61,10 @@ export default {
             //     category_id: '16, 34, 2',
             //     ID: 44,
             // });
+            //usuwanie kategorii
+            // this.$store.dispatch('deleteRecipes', 43);
+            //usuwanie przepisu
+            // this.$store.dispatch('deleteCategory', 16);
         },
     },
     computed: {
