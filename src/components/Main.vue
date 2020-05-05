@@ -1,8 +1,6 @@
 <template>
     <div class="wrapper">
         <h1>Książka kucharska</h1>
-        <button @click="addCategory()">Dodaj kategorię</button>
-        <button @click="addRecipes()">Dodaj przepis</button>
     </div>
 </template>
 
