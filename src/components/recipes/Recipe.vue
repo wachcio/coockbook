@@ -1,11 +1,15 @@
 <template>
-    <div></div>
+    <div>
+        <h2>{{ recipe.name }}</h2>
+        <p v-html="recipe.ingredients"></p>
+        <p v-html="recipe.execution"></p>
+    </div>
 </template>
 
 <script>
 export default {
     name: 'Recipe',
-    props: {},
+    props: { recipe: Object },
     data() {
         return {};
     },

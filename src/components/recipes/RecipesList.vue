@@ -1,5 +1,11 @@
 <template>
-    <div><Recipe /></div>
+    <div v-if="isLoaded">
+        <Recipe
+            v-for="(recipe, index) in recipes"
+            :key="index"
+            :recipe="recipe"
+        />
+    </div>
 </template>
 
 <script>
@@ -38,6 +44,10 @@ export default {
             'categoriesID',
         ]),
         ...mapGetters([]),
+        isLoaded() {
+            if (this.recipes.length) return true;
+            else return false;
+        },
     },
     created() {},
     watch: {},
