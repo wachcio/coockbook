@@ -1,11 +1,13 @@
 <template>
     <div class="wrapper">
         <h1>Książka kucharska</h1>
+        <RecipeList />
     </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+import RecipeList from './recipes/RecipesList.vue';
 
 export default {
     name: 'Main',
@@ -23,7 +25,7 @@ export default {
             newCategory: 'przetwory',
         };
     },
-    components: {},
+    components: { RecipeList },
     methods: {
         ...mapMutations([
             'updateRecipes',
