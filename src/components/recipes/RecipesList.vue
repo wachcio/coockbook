@@ -1,9 +1,10 @@
 <template>
-    <div v-if="isLoaded">
+    <div v-if="isLoaded" class="recipes__list">
         <Recipe
             v-for="(recipe, index) in recipes"
             :key="index"
             :recipe="recipe"
+            class="recipes__item"
         />
     </div>
 </template>
@@ -54,4 +55,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.recipes__list {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
