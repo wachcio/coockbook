@@ -68,6 +68,7 @@ export default {
         return axios
             .post(`${context.state.endpoints.recipes}`, {
                 name: recipes.name,
+                description: recipes.description,
                 ingredients: recipes.ingredients,
                 execution: recipes.execution,
                 picture: recipes.picture,
@@ -102,6 +103,7 @@ export default {
         axios
             .put(`${context.state.endpoints.recipesID}${recipes.ID}`, {
                 name: recipes.name,
+                description: recipes.description,
                 ingredients: recipes.ingredients,
                 execution: recipes.execution,
                 picture: recipes.picture,

@@ -21,4 +21,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+</style>
