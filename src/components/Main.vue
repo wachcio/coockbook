@@ -16,6 +16,7 @@ export default {
         return {
             newRecipes: {
                 name: 'dżem śliwkowy',
+                description: 'mały opis potrawy',
                 ingredients: 'składniki',
                 execution: 'wykonanie',
                 picture: 'obraz',
