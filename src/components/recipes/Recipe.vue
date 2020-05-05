@@ -2,7 +2,7 @@
     <div>
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.ingredients"></p>
-        <p v-html="recipe.execution"></p>
+        <!-- <p v-html="recipe.execution"></p> -->
     </div>
 </template>
 

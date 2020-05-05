@@ -57,7 +57,25 @@ export default {
 
 <style lang="scss" scoped>
 .recipes__list {
-    width: 100vw;
-    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 200px;
+    grid-gap: 1.5em;
+    margin: 1em;
+}
+
+.recipes__item {
+    background-color: rgb(255, 216, 41);
+    padding: 0.7em;
+    border-radius: 20px;
+    transition: 0.2s;
+    transform: translate(0, 0);
+    box-shadow: 10px 10px 19px -8px rgba(0, 0, 0, 0.36);
+
+    &:hover {
+        box-shadow: 13px 13px 19px -8px rgba(0, 0, 0, 0.6);
+        transform: translate(-3px, -3px);
+        cursor: pointer;
+    }
 }
 </style>
