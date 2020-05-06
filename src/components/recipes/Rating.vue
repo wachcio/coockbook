@@ -1,10 +1,12 @@
 <template>
     <div class="star_wrapper">
-        <font-awesome-icon class="star star__active" icon="star" size="lg" />
-        <font-awesome-icon class="star" icon="star" size="lg" />
-        <font-awesome-icon class="star" icon="star" size="lg" />
-        <font-awesome-icon class="star" icon="star" size="lg" />
-        <font-awesome-icon class="star" icon="star" size="lg" />
+        <font-awesome-icon
+            v-for="(starClass, index) in 5"
+            :key="`star_${index}`"
+            :class="ratingArray[index]"
+            icon="star"
+            size="lg"
+        />
     </div>
 </template>
 
@@ -15,12 +17,23 @@ export default {
         rating: Number,
     },
     data() {
-        return {};
+        return {
+            ratingArray: [],
+        };
     },
     components: {},
     methods: {},
     computed: {},
     created() {},
+    mounted() {
+        for (let i = 0; i < 5; i++) {
+            if (i < this.rating) {
+                this.ratingArray.push('star star__active');
+            } else {
+                this.ratingArray.push('star');
+            }
+        }
+    },
     watch: {},
 };
 </script>
