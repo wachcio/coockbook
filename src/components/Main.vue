@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
-        <input type="text" v-model="filters.searchText" class="search" />
+        <span>
+            <input type="text" v-model="filters.searchText" class="search"/>
+            <font-awesome-icon class="search__magnifier" icon="search" size="lg"
+        /></span>
         <RecipeList :filtersData="filtersData" />
     </div>
 </template>
@@ -142,6 +145,13 @@ h1 {
     text-align: center;
     margin: 1em 0;
 }
+span {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 .search {
     margin: 1em;
     background-color: rgb(255, 216, 41);
@@ -157,6 +167,9 @@ h1 {
     &:hover,
     &:focus {
         box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.6);
+    }
+    &__magnifier {
+        transform: translateX(-40px);
     }
 }
 </style>
