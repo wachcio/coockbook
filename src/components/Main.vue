@@ -19,7 +19,11 @@
                         size="lg"
                     />
                 </span>
-                <select name="categories" v-model="filters.category">
+                <select
+                    name="categories"
+                    v-model="filters.category"
+                    @change="getCategoryIDFromCategoryName()"
+                >
                     <option selected value="all">wszystkie</option>
                     <option
                         v-for="(category, index) in categories"
@@ -56,6 +60,7 @@ export default {
             filters: {
                 searchText: '',
                 category: 'all',
+                categoryID: -1,
             },
         };
     },
@@ -118,6 +123,12 @@ export default {
             this.$store.dispatch('addRecipes', this.newRecipes);
             this.refreshData('categories');
         },
+        getCategoryIDFromCategoryName() {
+            if (this.filters.categoryID == 'all') return -1;
+            this.filters.categoryID = _.find(this.categories, {
+                category_name: this.filters.category,
+            }).ID;
+        },
     },
     computed: {
         ...mapState([
@@ -129,6 +140,7 @@ export default {
             'categoriesID',
         ]),
         ...mapGetters([]),
+
         filtersData() {
             // let result;
             const regexStr =
