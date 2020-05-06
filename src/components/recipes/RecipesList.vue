@@ -1,7 +1,7 @@
 <template>
     <div v-if="isLoaded" class="recipes__list">
         <Recipe
-            v-for="(recipe, index) in recipes"
+            v-for="(recipe, index) in filtersData"
             :key="index"
             :recipe="recipe"
             class="recipes__item"
@@ -14,7 +14,7 @@ import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import Recipe from './Recipe.vue';
 export default {
     name: 'RecipesList',
-    props: {},
+    props: { filtersData: Array },
     data() {
         return {};
     },

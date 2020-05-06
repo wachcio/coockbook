@@ -1,13 +1,14 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
-        <RecipeList />
+        <RecipeList :filtersData="filtersData" />
     </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import RecipeList from './recipes/RecipesList.vue';
+import _ from 'lodash';
 
 export default {
     name: 'Main',
@@ -24,6 +25,10 @@ export default {
                 category_id: '1,2,3',
             },
             newCategory: 'przetwory',
+            filters: {
+                searchText: '',
+                category: 'all',
+            },
         };
     },
     components: { RecipeList },
@@ -96,6 +101,23 @@ export default {
             'categoriesID',
         ]),
         ...mapGetters([]),
+        filtersData() {
+            // let result;
+            const regexStr =
+                '(?=.*' +
+                this.filters.searchText.split(/,|\s/).join(')(?=.*') +
+                ')';
+            const searchRegEx = new RegExp(regexStr, 'gi');
+
+            return _.filter(this.recipes, (o) => {
+                let result =
+                    String(o.name).search(searchRegEx) &&
+                    String(o.description).search(searchRegEx) &&
+                    String(o.ingredients).search(searchRegEx) &&
+                    String(o.execution).search(searchRegEx);
+                return result == 0 ? true : false;
+            });
+        },
     },
     created() {
         this.refreshData('aaa');
