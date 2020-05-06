@@ -124,10 +124,13 @@ export default {
             this.refreshData('categories');
         },
         getCategoryIDFromCategoryName() {
-            if (this.filters.categoryID == 'all') return -1;
-            this.filters.categoryID = _.find(this.categories, {
-                category_name: this.filters.category,
-            }).ID;
+            if (this.filters.category == 'all') {
+                this.filters.categoryID = -1;
+            } else {
+                this.filters.categoryID = _.find(this.categories, {
+                    category_name: this.filters.category,
+                }).ID;
+            }
         },
     },
     computed: {
