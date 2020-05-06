@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
+        <input type="text" v-model="filters.searchText" class="search" />
         <RecipeList :filtersData="filtersData" />
     </div>
 </template>
@@ -133,9 +134,29 @@ export default {
 .container {
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 h1 {
     text-align: center;
     margin: 1em 0;
+}
+.search {
+    margin: 1em;
+    background-color: rgb(255, 216, 41);
+    border: none;
+    border-radius: 10px;
+    line-height: 30px;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    transition: 0.2s;
+    box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.36);
+
+    &:hover,
+    &:focus {
+        box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.6);
+    }
 }
 </style>
