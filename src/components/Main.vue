@@ -157,7 +157,8 @@ span {
     background-color: rgb(255, 216, 41);
     border: none;
     border-radius: 10px;
-    line-height: 30px;
+    font-size: 1.2em;
+    line-height: 1.6em;
     width: 80%;
     max-width: 300px;
     text-align: center;
@@ -168,8 +169,15 @@ span {
     &:focus {
         box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.6);
     }
+
     &__magnifier {
-        transform: translateX(-40px);
+        transform: translateX(-45px);
+        color: gray;
+        transition: 0.2s color;
+    }
+    &:focus + &__magnifier,
+    &:hover + &__magnifier {
+        color: darken(gray, 20%);
     }
 }
 </style>
