@@ -7,17 +7,18 @@
             "
         >
             <form action="">
-                <input
-                    type="text"
-                    v-model="filters.searchText"
-                    class="search"
-                />
-                <font-awesome-icon
-                    class="search__magnifier"
-                    icon="search"
-                    size="lg"
-                />
-
+                <span>
+                    <input
+                        type="text"
+                        v-model="filters.searchText"
+                        class="search"
+                    />
+                    <font-awesome-icon
+                        class="search__magnifier"
+                        icon="search"
+                        size="lg"
+                    />
+                </span>
                 <select name="categories" v-model="filters.category">
                     <option selected value="all">wszystkie</option>
                     <option
@@ -169,14 +170,21 @@ h1 {
     margin: 1em 0;
 }
 form {
-    display: flex;
+    flex-direction: column;
+}
+span {
     flex-direction: row;
+}
+form,
+span {
+    display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
 }
-.search {
-    margin: 1em;
+.search,
+select {
+    margin: 0 1em;
     background-color: rgb(255, 216, 41);
     border: none;
     border-radius: 10px;
@@ -202,5 +210,10 @@ form {
     &:hover + &__magnifier {
         color: darken(gray, 20%);
     }
+}
+select {
+    margin: 1em 0 0 0;
+    display: inline-block;
+    height: 1.5em;
 }
 </style>
