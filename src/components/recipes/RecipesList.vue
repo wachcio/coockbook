@@ -62,6 +62,13 @@ export default {
     grid-auto-rows: 200px;
     grid-gap: 1.5em;
     margin: 1em;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .recipes__item {
