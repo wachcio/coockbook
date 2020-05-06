@@ -22,7 +22,7 @@
                 <select
                     name="categories"
                     v-model="filters.category"
-                    @change="getCategoryIDFromCategoryName()"
+                    @change="getCategoryIDFromCategotiesArray()"
                 >
                     <option selected value="all">wszystkie</option>
                     <option
@@ -123,13 +123,17 @@ export default {
             this.$store.dispatch('addRecipes', this.newRecipes);
             this.refreshData('categories');
         },
-        getCategoryIDFromCategoryName() {
+        getCategoryIDFromCategotiesArray() {
             if (this.filters.category == 'all') {
                 this.filters.categoryID = -1;
             } else {
                 this.filters.categoryID = _.find(this.categories, {
                     category_name: this.filters.category,
                 }).ID;
+                this.$store.dispatch(
+                    'getRecipesByCategoryIDJSON',
+                    this.filters.categoryID
+                );
             }
         },
     },
@@ -139,6 +143,7 @@ export default {
             'recipes',
             'recipesID',
             'recipesByCategory',
+            'recipesByCategoryID',
             'categories',
             'categoriesID',
         ]),
@@ -166,7 +171,18 @@ export default {
                 );
             } else {
                 //wyszukiwanie jeśli zaznaczono kategorię
-                return false;
+
+                return _.sortBy(
+                    _.filter(this.recipesByCategoryID, (o) => {
+                        let result =
+                            String(o.name).search(searchRegEx) &&
+                            String(o.description).search(searchRegEx) &&
+                            String(o.ingredients).search(searchRegEx) &&
+                            String(o.execution).search(searchRegEx);
+                        return result == 0 ? true : false;
+                    }),
+                    'name'
+                );
             }
         },
     },

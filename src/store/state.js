@@ -3,6 +3,7 @@ export default {
         recipes: 'recipes',
         recipesID: 'recipes/',
         recipesByCategory: 'recipes_by_category',
+        recipesByCategoryID: 'recipes_by_category/',
         categories: 'categories',
         categoriesID: 'categories/',
     },
@@ -11,5 +12,6 @@ export default {
     recipesByCategory: {},
     categories: {},
     categoriesID: {},
+    recipesByCategoryID: {},
     operationStatus: {},
 };

@@ -27,6 +27,13 @@ export default {
             .get(`${context.state.endpoints.recipesByCategory}`)
             .then((res) => context.commit('getRecipesByCategory', res.data));
     },
+    getRecipesByCategoryIDJSON(context, ID) {
+        // context.commit("isLoadedChange", false);
+
+        axios
+            .get(`${context.state.endpoints.recipesByCategoryID}${ID}`)
+            .then((res) => context.commit('getRecipesByCategoryID', res.data));
+    },
     getCategoriesJSON(context) {
         // context.commit("isLoadedChange", false);
 

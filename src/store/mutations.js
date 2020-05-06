@@ -13,6 +13,9 @@ export default {
     getRecipesByCategory(state, payload) {
         state.recipesByCategory = payload;
     },
+    getRecipesByCategoryID(state, payload) {
+        state.recipesByCategoryID = payload;
+    },
     getCategories(state, payload) {
         state.categories = payload;
     },
