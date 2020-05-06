@@ -1,11 +1,34 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
-        <span>
-            <input type="text" v-model="filters.searchText" class="search"/>
-            <font-awesome-icon class="search__magnifier" icon="search" size="lg"
-        /></span>
-        <RecipeList :filtersData="filtersData" />
+        <template
+            v-if="
+                categories.length && recipes.length && recipesByCategory.length
+            "
+        >
+            <form action="">
+                <input
+                    type="text"
+                    v-model="filters.searchText"
+                    class="search"
+                />
+                <font-awesome-icon
+                    class="search__magnifier"
+                    icon="search"
+                    size="lg"
+                />
+
+                <select name="categories" v-model="filters.category">
+                    <option selected value="all">wszystkie</option>
+                    <option
+                        v-for="(category, index) in categories"
+                        :key="index"
+                        >{{ category.category_name }}</option
+                    >
+                </select>
+            </form>
+            <RecipeList :filtersData="filtersData" />
+        </template>
     </div>
 </template>
 
@@ -145,7 +168,7 @@ h1 {
     text-align: center;
     margin: 1em 0;
 }
-span {
+form {
     display: flex;
     flex-direction: row;
     width: 100%;
