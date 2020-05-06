@@ -149,17 +149,22 @@ export default {
                 ')';
             const searchRegEx = new RegExp(regexStr, 'gi');
 
-            return _.sortBy(
-                _.filter(this.recipes, (o) => {
-                    let result =
-                        String(o.name).search(searchRegEx) &&
-                        String(o.description).search(searchRegEx) &&
-                        String(o.ingredients).search(searchRegEx) &&
-                        String(o.execution).search(searchRegEx);
-                    return result == 0 ? true : false;
-                }),
-                'name'
-            );
+            if (this.filters.categoryID == -1) {
+                return _.sortBy(
+                    _.filter(this.recipes, (o) => {
+                        let result =
+                            String(o.name).search(searchRegEx) &&
+                            String(o.description).search(searchRegEx) &&
+                            String(o.ingredients).search(searchRegEx) &&
+                            String(o.execution).search(searchRegEx);
+                        return result == 0 ? true : false;
+                    }),
+                    'name'
+                );
+            } else {
+                //wyszukiwanie jeśli zaznaczono kategorię
+                return false;
+            }
         },
     },
     created() {
