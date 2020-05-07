@@ -6,11 +6,20 @@ import routes from './routes/routes.js';
 import store from './store/store.js';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
+import {
+    faSearch,
+    faStar,
+    faUtensils,
+    faHamburger,
+    faPizzaSlice,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faSearch);
 library.add(faStar);
+library.add(faUtensils);
+library.add(faHamburger);
+library.add(faPizzaSlice);
 
 const router = new VueRouter({
     // model: 'history',
