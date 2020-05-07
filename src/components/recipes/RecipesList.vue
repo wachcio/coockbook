@@ -72,8 +72,20 @@ export default {
 }
 
 .recipes__item {
-    background-color: rgb(255, 216, 41);
-    padding: 0.7em;
+    // background-color: rgb(255, 216, 41);
+    background: rgb(255, 216, 41);
+    // background: linear-gradient(
+    //     135deg,
+    //     rgba(255, 216, 41, 1) 0%,
+    //     rgba(246, 221, 109, 1) 100%
+    // );
+    background: linear-gradient(
+        135deg,
+        rgba(255, 216, 41, 1) 0%,
+        rgba(255, 240, 174, 1) 50%,
+        rgba(255, 216, 41, 1) 100%
+    );
+    padding: 0.8em;
     border-radius: 20px;
     transition: 0.2s;
     transform: translate(0, 0);

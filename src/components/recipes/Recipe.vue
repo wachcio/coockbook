@@ -1,8 +1,7 @@
 <template>
-    <div>
+    <div class="recipe_wrapper">
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.description"></p>
-        <!-- <p v-html="recipe.execution"></p> -->
         <Star :rating="recipe.rating" />
     </div>
 </template>
@@ -25,9 +24,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.racipe_wrapper {
+}
 h2 {
     text-align: center;
     text-transform: uppercase;
     font-weight: 700;
+    margin-bottom: 0.5em;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.25);
 }
 </style>
