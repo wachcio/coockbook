@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
+        <router-view></router-view>
         <template
             v-if="
                 categories.length && recipes.length && recipesByCategory.length

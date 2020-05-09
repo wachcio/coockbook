@@ -5,13 +5,16 @@
             :key="index"
             :recipe="recipe"
             class="recipes__item"
-        />
+        >
+        </RecipeCard>
     </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import RecipeCard from './RecipeCard.vue';
+// import RecipeDetails from "./RecipeDetails.vue"
+
 export default {
     name: 'RecipesList',
     props: { filtersData: Array },

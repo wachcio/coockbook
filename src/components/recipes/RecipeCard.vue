@@ -1,11 +1,11 @@
 <template>
-    <div class="recipe_wrapper">
+    <router-link :to="{ name: 'recipeDetail' }" class="recipe_wrapper">
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.description"></p>
         <StarRecipeCard :rating="recipe.rating" />
         <font-awesome-icon class="utensils" icon="utensils" size="lg" />
         <font-awesome-icon class="pizza_slice" icon="pizza-slice" size="lg" />
-    </div>
+    </router-link>
 </template>
 
 <script>
