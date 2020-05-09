@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoaded" class="recipes__list">
-        <Recipe
+        <RecipeCard
             v-for="(recipe, index) in filtersData"
             :key="index"
             :recipe="recipe"
@@ -11,14 +11,14 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-import Recipe from './Recipe.vue';
+import RecipeCard from './RecipeCard.vue';
 export default {
     name: 'RecipesList',
     props: { filtersData: Array },
     data() {
         return {};
     },
-    components: { Recipe },
+    components: { RecipeCard },
     methods: {
         ...mapMutations([
             'updateRecipes',

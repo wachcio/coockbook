@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'Rating',
+    name: 'StarRecipeCard',
     props: {
         rating: Number,
     },

@@ -2,14 +2,14 @@
     <div class="recipe_wrapper">
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.description"></p>
-        <Star :rating="recipe.rating" />
+        <StarRecipeCard :rating="recipe.rating" />
         <font-awesome-icon class="utensils" icon="utensils" size="lg" />
         <font-awesome-icon class="pizza_slice" icon="pizza-slice" size="lg" />
     </div>
 </template>
 
 <script>
-import Star from './Rating.vue';
+import StarRecipeCard from './StarRecipeCard.vue';
 
 export default {
     name: 'Recipe',
@@ -17,7 +17,7 @@ export default {
     data() {
         return {};
     },
-    components: { Star },
+    components: { StarRecipeCard },
     methods: {},
     computed: {},
     created() {},
