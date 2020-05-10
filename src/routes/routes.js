@@ -10,5 +10,6 @@ export default [
         path: '/recipeDetail',
         name: 'recipeDetail',
         component: RecipeDetail,
+        props: true,
     },
 ];

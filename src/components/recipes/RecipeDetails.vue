@@ -6,7 +6,7 @@
 export default {
     name: 'RecipeDetails',
     props: {
-        recipe: String,
+        recipe: Object,
     },
     data() {
         return {};
