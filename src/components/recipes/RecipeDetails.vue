@@ -1,12 +1,12 @@
 <template>
-    <H1>Szczegóły przepisu</H1>
+    <H1>{{ recipe }}</H1>
 </template>
 
 <script>
 export default {
     name: 'RecipeDetails',
     props: {
-        recipe: Object,
+        recipe: String,
     },
     data() {
         return {};

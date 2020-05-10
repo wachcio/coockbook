@@ -1,5 +1,8 @@
 <template>
-    <router-link :to="{ name: 'recipeDetail' }" class="recipe_wrapper">
+    <router-link
+        :to="{ name: 'recipeDetail', props: { recipe: recipe.name } }"
+        class="recipe_wrapper"
+    >
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.description"></p>
         <StarRecipeCard :rating="recipe.rating" />
