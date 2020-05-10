@@ -1,5 +1,5 @@
 <template>
-    <H1>{{ recipe }}</H1>
+    <H1>{{ recipe.name }}</H1>
 </template>
 
 <script>

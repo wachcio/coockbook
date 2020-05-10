@@ -1,6 +1,6 @@
 <template>
     <router-link
-        :to="{ name: 'recipeDetail', props: { recipe: 'recipe' } }"
+        :to="{ name: 'recipeDetail', params: { recipe: recipe } }"
         class="recipe_wrapper"
     >
         <h2>{{ recipe.name }}</h2>
