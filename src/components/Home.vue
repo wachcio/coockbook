@@ -1,34 +1,51 @@
 <template>
-    <div v-if="categories.length && recipes.length && recipesByCategory.length">
-        <form action="">
-            <span>
-                <input
-                    type="text"
-                    v-model="filters.searchText"
-                    class="search"
-                />
-                <font-awesome-icon
-                    class="search__magnifier"
-                    icon="search"
-                    size="lg"
-                />
-            </span>
-            <span>
-                <select
-                    name="categories"
-                    v-model="filters.category"
-                    @change="getCategoryIDFromCategotiesArray()"
-                >
-                    <option selected value="all">wszystkie</option>
-                    <option
-                        v-for="(category, index) in categories"
-                        :key="index"
-                        >{{ category.category_name }}</option
+    <div>
+        <div
+            v-if="
+                categories.length && recipes.length && recipesByCategory.length
+            "
+        >
+            <form action="">
+                <span>
+                    <input
+                        type="text"
+                        v-model="filters.searchText"
+                        class="search"
+                    />
+                    <font-awesome-icon
+                        class="search__magnifier"
+                        icon="search"
+                        size="lg"
+                    />
+                </span>
+                <span>
+                    <select
+                        name="categories"
+                        v-model="filters.category"
+                        @change="getCategoryIDFromCategotiesArray()"
                     >
-                </select>
-            </span>
-        </form>
-        <RecipeList :filtersData="filtersData()" />
+                        <option selected value="all">wszystkie</option>
+                        <option
+                            v-for="(category, index) in categories"
+                            :key="index"
+                            >{{ category.category_name }}</option
+                        >
+                    </select>
+                </span>
+            </form>
+            <RecipeList :filtersData="filtersData()" />
+        </div>
+        <div class="infinity" v-else>
+            <div>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+            </div>
+        </div>
     </div>
 </template>
 
