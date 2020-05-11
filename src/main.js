@@ -22,7 +22,7 @@ library.add(faHamburger);
 library.add(faPizzaSlice);
 
 const router = new VueRouter({
-    // model: 'history',
+    mode: 'history',
     routes,
 });
 

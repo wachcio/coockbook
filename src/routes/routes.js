@@ -7,7 +7,7 @@ export default [
         component: Home,
     },
     {
-        path: '/recipeDetail',
+        path: '/recipe/:slug',
         name: 'recipeDetail',
         component: RecipeDetail,
         props: true,

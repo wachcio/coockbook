@@ -1,6 +1,9 @@
 <template>
     <router-link
-        :to="{ name: 'recipeDetail', params: { recipe: recipe } }"
+        :to="{
+            name: 'recipeDetail',
+            params: { slug: getSlug, recipe: recipe },
+        }"
         class="recipe_wrapper"
     >
         <h2>{{ recipe.name }}</h2>
@@ -13,6 +16,7 @@
 
 <script>
 import StarRecipeCard from './StarRecipeCard.vue';
+let slug = require('slug');
 
 export default {
     name: 'Recipe',
@@ -22,7 +26,11 @@ export default {
     },
     components: { StarRecipeCard },
     methods: {},
-    computed: {},
+    computed: {
+        getSlug() {
+            return slug(this.recipe.name);
+        },
+    },
     created() {},
     watch: {},
 };
