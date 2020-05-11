@@ -13,16 +13,20 @@
                     size="lg"
                 />
             </span>
-            <select
-                name="categories"
-                v-model="filters.category"
-                @change="getCategoryIDFromCategotiesArray()"
-            >
-                <option selected value="all">wszystkie</option>
-                <option v-for="(category, index) in categories" :key="index">{{
-                    category.category_name
-                }}</option>
-            </select>
+            <span>
+                <select
+                    name="categories"
+                    v-model="filters.category"
+                    @change="getCategoryIDFromCategotiesArray()"
+                >
+                    <option selected value="all">wszystkie</option>
+                    <option
+                        v-for="(category, index) in categories"
+                        :key="index"
+                        >{{ category.category_name }}</option
+                    >
+                </select>
+            </span>
         </form>
         <RecipeList :filtersData="filtersData()" />
     </div>
@@ -131,9 +135,13 @@ h1 {
     margin: 1em 0;
 }
 form {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
 }
 span {
+    display: flex;
     flex-direction: row;
 }
 form,
@@ -145,7 +153,7 @@ span {
 }
 .search,
 select {
-    margin: 0 1em;
+    // margin: 0 1em;
     background-color: rgb(255, 216, 41);
     border: none;
     border-radius: 10px;
@@ -163,7 +171,7 @@ select {
     }
 
     &__magnifier {
-        transform: translateX(-45px);
+        transform: translateX(-30px);
         color: gray;
         transition: 0.2s color;
     }
@@ -173,7 +181,7 @@ select {
     }
 }
 select {
-    margin: 1em 0 0 0;
+    // margin: 1em 0 0 0;
     display: inline-block;
     height: 1.5em;
 }
