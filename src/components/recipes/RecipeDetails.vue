@@ -3,16 +3,20 @@
         <div v-if="recipe">
             <H1 class="recipe_details__name">{{ recipe.name }}</H1>
             <p class="recipe_details__description">
-                {{ recipe.description }}
+                <vue-markdown :toc="true">
+                    {{ recipe.description }}</vue-markdown
+                >
             </p>
             <p class="recipe_details__ingredients">
-                {{ recipe.ingredients }}
+                <vue-markdown class="test">
+                    {{ recipe.ingredients }}</vue-markdown
+                >
             </p>
             <p class="recipe_details__execution">
-                {{ recipe.execution }}
+                <vue-markdown> {{ recipe.execution }}</vue-markdown>
             </p>
             <p class="recipe_details__categories">
-                {{ getCategories }}
+                <vue-markdown> {{ getCategories }}</vue-markdown>
             </p>
             <StarRating
                 class="recipe_details__rating"
@@ -25,6 +29,7 @@
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import StarRating from './StarRecipeCard';
+
 let slug = require('slug');
 import _ from 'lodash';
 export default {
@@ -93,23 +98,25 @@ export default {
 <style lang="scss" scoped>
 @import './../../style/main.scss';
 
-@mixin paragraphTitle {
-    display: block;
-    position: relative;
-    width: 100%;
-    text-transform: uppercase;
-    font-size: 1.5em;
-    top: -0.5em;
-    left: 0;
-    text-align: center;
-    margin: 0.5em 0;
-    border-bottom: darken($color: $primaryColor, $amount: 30) 2px solid;
+@mixin paragraphTitle($title) {
+    &::before {
+        content: $title;
+
+        display: block;
+        position: relative;
+        width: 100%;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        top: -0.5em;
+        left: 0;
+        text-align: center;
+        margin: 0.5em 0;
+        border-bottom: darken($color: $primaryColor, $amount: 30) 2px solid;
+    }
 }
 
 .recipe_details {
     width: 95%;
-    // min-height: 85vh;
-
     padding: 15px;
 
     border-radius: 21px;
@@ -131,34 +138,24 @@ export default {
             text-transform: uppercase;
         }
     }
-    // &__description {
-    //     &::before {
-    //         content: 'Opis';
-    //         @include paragraphTitle;
-    //     }
-    // }
+
     &__ingredients {
-        &::before {
-            content: 'Składniki';
-            @include paragraphTitle;
-        }
+        @include paragraphTitle('Składniki');
     }
     &__execution {
-        &::before {
-            content: 'Wykonanie';
-            @include paragraphTitle;
-        }
+        @include paragraphTitle('Wykonanie');
     }
+
     &__categories {
-        &::before {
-            content: 'Kategorie';
-            @include paragraphTitle;
-        }
+        @include paragraphTitle('Kategorie');
     }
     &__rating {
         position: relative;
         bottom: auto;
         padding: 2em 0 1em 0;
     }
+}
+li {
+    margin-left: 2em;
 }
 </style>

@@ -27,6 +27,7 @@ const router = new VueRouter({
     routes,
 });
 
+Vue.component('vue-markdown', VueMarkdown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(VueRouter);
 
@@ -35,8 +36,5 @@ Vue.config.productionTip = false;
 new Vue({
     store,
     router,
-    components: {
-        VueMarkdown,
-    },
     render: (h) => h(App),
 }).$mount('#app');
