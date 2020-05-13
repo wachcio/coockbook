@@ -6,10 +6,13 @@
                 {{ recipe.description }}
             </p>
             <p class="recipe_details__ingredients">
-                Składniki: {{ recipe.ingredients }}
+                {{ recipe.ingredients }}
             </p>
             <p class="recipe_details__execution">
-                Wykonanie: {{ recipe.execution }}
+                {{ recipe.execution }}
+            </p>
+            <p class="recipe_details__categories">
+                {{ getCategories }}
             </p>
             <StarRating
                 class="recipe_details__rating"
@@ -68,6 +71,13 @@ export default {
             'categoriesID',
         ]),
         ...mapGetters([]),
+        getCategories() {
+            return this.recipe.categories
+                .map((category) => {
+                    return category.category_name;
+                })
+                .join(', ');
+        },
     },
     created() {
         this.checkRecipe();
@@ -83,9 +93,23 @@ export default {
 <style lang="scss" scoped>
 @import './../../style/main.scss';
 
+@mixin paragraphTitle {
+    display: block;
+    position: relative;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    top: -0.5em;
+    // left: 50%;
+    // transform: translateY(-50%);
+    left: 0;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
 .recipe_details {
     width: 95%;
-    min-height: 85vh;
+    // min-height: 85vh;
 
     padding: 15px;
 
@@ -106,18 +130,31 @@ export default {
     &__description {
         &::before {
             content: 'Opis';
-            position: relative;
-            text-transform: uppercase;
-            font-size: 1.5em;
-            top: -1.5em;
-            left: 50%;
-            // transform: translate(-50%, 0);
-            margin-top: 3em;
+            @include paragraphTitle;
+        }
+    }
+    &__ingredients {
+        &::before {
+            content: 'Składniki';
+            @include paragraphTitle;
+        }
+    }
+    &__execution {
+        &::before {
+            content: 'Wykonanie';
+            @include paragraphTitle;
+        }
+    }
+    &__categories {
+        &::before {
+            content: 'Kategorie';
+            @include paragraphTitle;
         }
     }
     &__rating {
+        position: relative;
         bottom: auto;
-        padding-top: 2em;
+        padding: 2em 0 1em 0;
     }
 }
 </style>
