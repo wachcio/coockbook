@@ -3,7 +3,7 @@
         <div v-if="recipe">
             <H1 class="recipe_details__name">{{ recipe.name }}</H1>
             <p class="recipe_details__description">
-                Opis: {{ recipe.description }}
+                {{ recipe.description }}
             </p>
             <p class="recipe_details__ingredients">
                 Składniki: {{ recipe.ingredients }}
@@ -93,11 +93,26 @@ export default {
     background: #ffd024;
     box-shadow: inset 7px 7px 15px #ebbf21, inset -7px -7px 15px #ffe127;
 
+    & p {
+        padding-top: 2em;
+    }
     &__name {
         text-align: center;
 
         &::first-letter {
             text-transform: uppercase;
+        }
+    }
+    &__description {
+        &::before {
+            content: 'Opis';
+            position: relative;
+            text-transform: uppercase;
+            font-size: 1.5em;
+            top: -1.5em;
+            left: 50%;
+            // transform: translate(-50%, 0);
+            margin-top: 3em;
         }
     }
     &__rating {
