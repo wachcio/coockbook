@@ -100,11 +100,10 @@ export default {
     text-transform: uppercase;
     font-size: 1.5em;
     top: -0.5em;
-    // left: 50%;
-    // transform: translateY(-50%);
     left: 0;
     text-align: center;
-    margin-top: 0.5em;
+    margin: 0.5em 0;
+    border-bottom: darken($color: $primaryColor, $amount: 30) 2px solid;
 }
 
 .recipe_details {
@@ -117,8 +116,13 @@ export default {
     background: #ffd024;
     box-shadow: inset 7px 7px 15px #ebbf21, inset -7px -7px 15px #ffe127;
 
-    & p {
+    p {
         padding-top: 2em;
+        text-align: justify;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
     }
     &__name {
         text-align: center;
@@ -127,12 +131,12 @@ export default {
             text-transform: uppercase;
         }
     }
-    &__description {
-        &::before {
-            content: 'Opis';
-            @include paragraphTitle;
-        }
-    }
+    // &__description {
+    //     &::before {
+    //         content: 'Opis';
+    //         @include paragraphTitle;
+    //     }
+    // }
     &__ingredients {
         &::before {
             content: 'Składniki';
