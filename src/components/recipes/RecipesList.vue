@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../../style/main.scss';
+
 .recipes__list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -76,7 +78,7 @@ export default {
 
 .recipes__item {
     // background-color: rgb(255, 216, 41);
-    background: rgb(255, 216, 41);
+    background: $primaryColor;
     // background: linear-gradient(
     //     135deg,
     //     rgba(255, 216, 41, 1) 0%,
@@ -84,9 +86,9 @@ export default {
     // );
     background: linear-gradient(
         135deg,
-        rgba(255, 216, 41, 1) 0%,
-        rgba(255, 240, 174, 1) 50%,
-        rgba(255, 216, 41, 1) 100%
+        $primaryColor 0%,
+        lighten($primaryColor, 25) 50%,
+        $primaryColor 100%
     );
     padding: 0.8em;
     border-radius: 20px;

@@ -37,6 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../../style/main.scss';
 .racipe_wrapper {
 }
 h2 {

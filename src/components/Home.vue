@@ -147,6 +147,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../style/main.scss';
+
 h1 {
     text-align: center;
     margin: 1em 0;
@@ -171,30 +173,33 @@ span {
 .search,
 select {
     // margin: 0 1em;
-    background-color: rgb(255, 216, 41);
+    background-color: transparent;
     border: none;
-    border-radius: 10px;
+    outline: none;
+    // border-radius: 10px;
     font-size: 1.2em;
     line-height: 1.6em;
     width: 80%;
     max-width: 300px;
     text-align: center;
-    transition: 0.2s;
-    box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.36);
+    border-bottom: darken($primaryColor, 15) solid 2px;
+    // transition: 0.2s;
+    // box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.36);
 
     &:hover,
     &:focus {
-        box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.6);
+        // box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.6);
+        border-bottom: darken($primaryColor, 25) solid 2px;
     }
 
     &__magnifier {
         transform: translateX(-30px);
-        color: gray;
+        color: darken($primaryColor, 15);
         transition: 0.2s color;
     }
     &:focus + &__magnifier,
     &:hover + &__magnifier {
-        color: darken(gray, 20%);
+        color: darken($primaryColor, 25);
     }
 }
 select {
