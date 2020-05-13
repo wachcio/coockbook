@@ -4,6 +4,7 @@ import App from './App.vue';
 import 'es6-promise/auto';
 import routes from './routes/routes.js';
 import store from './store/store.js';
+import VueMarkdown from 'vue-markdown';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -31,4 +32,11 @@ Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
 
-new Vue({ store, router, render: (h) => h(App) }).$mount('#app');
+new Vue({
+    store,
+    router,
+    components: {
+        VueMarkdown,
+    },
+    render: (h) => h(App),
+}).$mount('#app');
