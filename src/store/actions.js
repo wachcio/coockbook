@@ -30,9 +30,25 @@ export default {
     getRecipesByCategoryIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
 
-        axios
-            .get(`${context.state.endpoints.recipesByCategoryID}${ID}`)
-            .then((res) => context.commit('getRecipesByCategoryID', res.data));
+        // axios
+        //     .get(`${context.state.endpoints.recipesByCategoryID}${ID}`)
+        //     .then((res) => context.commit('getRecipesByCategoryID', res.data));
+
+        let result = {};
+
+        context.state.recipesByCategory.map((o) => {
+            return o[0].ID == ID ? (result = o[1]) : undefined;
+        });
+
+        result.map((o) => {
+            const id = o.recipes_id;
+
+            context.state.recipes.map((o2) => {
+                o2.ID == id ? (o.categories = o2.categories) : null;
+            });
+        });
+
+        context.commit('getRecipesByCategoryID', result);
     },
     getCategoriesJSON(context) {
         // context.commit("isLoadedChange", false);

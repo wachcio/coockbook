@@ -7,7 +7,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-import _ from 'lodash';
+// import _ from 'lodash';
 export default {
     name: 'Main',
     props: {},
@@ -73,19 +73,19 @@ export default {
             this.$store.dispatch('addRecipes', this.newRecipes);
             this.refreshData('categories');
         },
-        getCategoryIDFromCategotiesArray() {
-            if (this.filters.category == 'all') {
-                this.filters.categoryID = -1;
-            } else {
-                this.filters.categoryID = _.find(this.categories, {
-                    category_name: this.filters.category,
-                }).ID;
-                this.$store.dispatch(
-                    'getRecipesByCategoryIDJSON',
-                    this.filters.categoryID
-                );
-            }
-        },
+        // getCategoryIDFromCategotiesArray() {
+        //     if (this.filters.category == 'all') {
+        //         this.filters.categoryID = -1;
+        //     } else {
+        //         this.filters.categoryID = _.find(this.categories, {
+        //             category_name: this.filters.category,
+        //         }).ID;
+        //         this.$store.dispatch(
+        //             'getRecipesByCategoryIDJSON',
+        //             this.filters.categoryID
+        //         );
+        //     }
+        // },
     },
     computed: {
         ...mapState([

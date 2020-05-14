@@ -128,6 +128,19 @@ export default {
                 );
             }
         },
+        getCategoryIDFromCategotiesArray() {
+            if (this.filters.category == 'all') {
+                this.filters.categoryID = -1;
+            } else {
+                this.filters.categoryID = _.find(this.categories, {
+                    category_name: this.filters.category,
+                }).ID;
+                this.$store.dispatch(
+                    'getRecipesByCategoryIDJSON',
+                    this.filters.categoryID
+                );
+            }
+        },
     },
     computed: {
         ...mapState([
