@@ -100,6 +100,9 @@ export default {
                 })
                 .join(', ');
         },
+        getSlug() {
+            return slug(this.recipe.name);
+        },
     },
     created() {
         this.checkRecipe();

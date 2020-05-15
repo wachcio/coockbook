@@ -3,25 +3,32 @@
         <div v-if="recipe">
             <Editor
                 class="recipe_details__name"
+                :options="editorOptions"
                 :initialValue="recipe.name"
+                ref="editorName"
+                @change="getNameHTML()"
             ></Editor>
 
             <Editor
                 class="recipe_details__description"
                 :initialValue="recipe.description"
+                :options="editorOptions"
             >
             </Editor>
             <Editor
                 class="recipe_details__ingredients"
                 :initialValue="recipe.ingredients"
+                :options="editorOptions"
             >
             </Editor>
             <Editor
                 class="recipe_details__execution"
                 :initialValue="recipe.execution"
+                :options="editorOptions"
             >
             </Editor>
             <div class="recipe_details__categories"></div>
+
             <div class="recipe_details__btn">
                 <div class="recipe_details__btn_OK">Zapisz</div>
                 <div class="recipe_details__btn_cancel">Anuluj</div>
@@ -45,7 +52,14 @@ export default {
         recipe: Object,
     },
     data() {
-        return {};
+        return {
+            editorOptions: {
+                language: 'pl-PL',
+            },
+            editorsValue: {
+                name: null,
+            },
+        };
     },
     components: { Editor },
     methods: {
@@ -72,6 +86,12 @@ export default {
                 this.recipe = this.recipes[index];
             }
         },
+        getNameHTML() {
+            console.log('refs', this.$refs);
+        },
+        onEditorNameStateChange(e) {
+            console.log('event', e);
+        },
     },
     computed: {
         ...mapState([
@@ -93,6 +113,7 @@ export default {
     },
     created() {
         this.checkRecipe();
+        this.editorsValue.name = this.recipe.name;
     },
     watch: {
         recipes: function() {
@@ -166,6 +187,7 @@ export default {
         display: flex;
         justify-content: space-around;
         padding-top: 1em;
+        padding-bottom: 3em;
     }
     &__btn_OK,
     &__btn_cancel {
