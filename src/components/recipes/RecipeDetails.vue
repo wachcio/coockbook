@@ -3,9 +3,7 @@
         <div v-if="recipe">
             <H1 class="recipe_details__name">{{ recipe.name }}</H1>
             <p class="recipe_details__description">
-                <vue-markdown :toc="true">
-                    {{ recipe.description }}</vue-markdown
-                >
+                <vue-markdown> {{ recipe.description }}</vue-markdown>
             </p>
             <p class="recipe_details__ingredients">
                 <vue-markdown class="test">
