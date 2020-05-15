@@ -13,6 +13,9 @@ import {
     faUtensils,
     faHamburger,
     faPizzaSlice,
+    faPlus,
+    faPen,
+    faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -21,6 +24,9 @@ library.add(faStar);
 library.add(faUtensils);
 library.add(faHamburger);
 library.add(faPizzaSlice);
+library.add(faPlus);
+library.add(faPen);
+library.add(faTrash);
 
 const router = new VueRouter({
     mode: 'history',

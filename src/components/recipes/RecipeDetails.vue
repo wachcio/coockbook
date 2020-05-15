@@ -2,6 +2,18 @@
     <div class="recipe_details">
         <div v-if="recipe">
             <H1 class="recipe_details__name">{{ recipe.name }}</H1>
+            <div class="recipe_details__modifications">
+                <font-awesome-icon
+                    class="recipe_details__modifications--edit"
+                    icon="pen"
+                    size="lg"
+                />
+                <font-awesome-icon
+                    class="recipe_details__modifications--delete"
+                    icon="trash"
+                    size="lg"
+                />
+            </div>
             <p class="recipe_details__description">
                 <vue-markdown> {{ recipe.description }}</vue-markdown>
             </p>
@@ -134,6 +146,37 @@ export default {
 
         &::first-letter {
             text-transform: uppercase;
+        }
+    }
+    &__modifications {
+        position: relative;
+        top: -1.7em;
+        right: 0.5em;
+        width: auto;
+        text-align: right;
+        color: lighten($color: $primaryColor, $amount: 10);
+
+        &--delete {
+            margin-left: 0.2em;
+            color: red;
+            opacity: 0.2;
+            transition: 0.2s opacity;
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+        &--edit {
+            margin-left: 0.2em;
+            color: darkgreen;
+            opacity: 0.2;
+            transition: 0.2s opacity;
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
         }
     }
 
