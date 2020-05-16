@@ -7,7 +7,7 @@
             ><input
                 class="categories__checkbox"
                 type="checkbox"
-                :value="category.category_name"
+                :value="parseInt(category.ID)"
                 v-model="checkedCategories"
             />
             {{ category.category_name }}</label
@@ -44,7 +44,7 @@ export default {
         ]),
         setChecked() {
             this.recipe.categories.map((el) => {
-                this.checkedCategories.push(el.category_name);
+                this.checkedCategories.push(parseInt(el.ID));
             });
         },
     },
