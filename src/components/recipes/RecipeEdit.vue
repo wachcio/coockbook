@@ -8,7 +8,6 @@
                 :options="editorOptions"
                 :initialValue="recipe.name"
                 ref="editorName"
-                @change="getNameHTML()"
             ></Editor>
 
             <Editor
@@ -17,6 +16,7 @@
                 height="100px"
                 :initialValue="recipe.description"
                 :options="editorOptions"
+                ref="editorDescription"
             >
             </Editor>
             <Editor
@@ -24,6 +24,7 @@
                 initialEditType="wysiwyg"
                 :initialValue="recipe.ingredients"
                 :options="editorOptions"
+                ref="editorIngredients"
             >
             </Editor>
             <Editor
@@ -31,6 +32,7 @@
                 initialEditType="wysiwyg"
                 :initialValue="recipe.execution"
                 :options="editorOptions"
+                ref="editorExecution"
             >
             </Editor>
             <div class="recipe_details__categories"></div>
@@ -61,6 +63,20 @@ export default {
         return {
             editorOptions: {
                 language: 'pl-PL',
+                toolbarItems: [
+                    'heading',
+                    'bold',
+                    'italic',
+                    'strike',
+                    'divider',
+                    'ul',
+                    'ol',
+                    'indent',
+                    'outdent',
+                    'divider',
+                    'table',
+                    'link',
+                ],
             },
             editorsValue: {
                 name: null,
