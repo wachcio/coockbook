@@ -40,7 +40,9 @@
             </div>
 
             <div class="recipe_details__btn">
-                <div class="recipe_details__btn_OK">Zapisz</div>
+                <div class="recipe_details__btn_save" @click="getMarkdown()">
+                    Zapisz
+                </div>
                 <div class="recipe_details__btn_cancel">Anuluj</div>
             </div>
         </div>
@@ -84,7 +86,13 @@ export default {
                 ],
             },
             editorsValue: {
-                name: null,
+                name: '',
+                description: '',
+                execution: '',
+                ingredients: '',
+                picture: '',
+                rating: 0,
+                categories: [],
             },
         };
     },
@@ -113,11 +121,29 @@ export default {
                 this.recipe = this.recipes[index];
             }
         },
-        getNameHTML() {
-            console.log('refs', this.$refs.editorName.invoke('getMarkdown'));
-        },
-        onEditorNameStateChange(e) {
-            console.log('event', e);
+        getMarkdown() {
+            // Aktualizacja przepisu
+            // this.$store.dispatch('updateRecipes', {
+            //     name: 'gofry5',
+            //     ingredients: 'składniki do gofrów',
+            //     execution: 'przepis na gofry',
+            //     picture: 'zdjęcie',
+            //     rating: 4,
+            //     category_id: '16, 34, 2',
+            //     ID: 44,
+            // });
+
+            let obj = {
+                name: this.$refs.editorName.invoke('getMarkdown'),
+                ingredients: this.$refs.editorIngredients.invoke('getMarkdown'),
+                execution: this.$refs.editorExecution.invoke('getMarkdown'),
+                picture: '',
+                rating: this.recipe.rating,
+                category_id: '16, 34, 2',
+                ID: this.recipe.ID,
+            };
+
+            console.log(obj);
         },
     },
     computed: {
@@ -138,13 +164,29 @@ export default {
                 .join(', ');
         },
     },
-    created() {
+    mounted() {
         this.checkRecipe();
-        this.editorsValue.name = this.recipe.name;
+        // this.editorsValue.name = this.recipe.name;
+        // this.editorsValue.description = this.recipe.description;
+        // this.editorsValue.execution = this.recipe.execution;
+        // this.editorsValue.ingredients = this.recipe.ingredients;
+        // this.editorsValue.rating = this.recipe.rating;
+        // this.editorsValue.picture = this.recipe.picture;
+        this.editorsValue = { ...this.recipe };
     },
     watch: {
+        recipe: function() {
+            this.editorsValue = { ...this.recipe };
+        },
         recipes: function() {
             this.checkRecipe();
+            this.editorsValue = { ...this.recipe };
+            // this.editorsValue.name = this.recipe.name;
+            // this.editorsValue.description = this.recipe.description;
+            // this.editorsValue.execution = this.recipe.execution;
+            // this.editorsValue.ingredients = this.recipe.ingredients;
+            // this.editorsValue.rating = this.recipe.rating;
+            // this.editorsValue.picture = this.recipe.picture;
         },
     },
 };
@@ -216,7 +258,7 @@ export default {
         padding-top: 1em;
         padding-bottom: 3em;
     }
-    &__btn_OK,
+    &__btn_save,
     &__btn_cancel {
         display: inline;
         color: white;
