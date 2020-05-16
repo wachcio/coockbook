@@ -35,7 +35,9 @@
                 ref="editorExecution"
             >
             </Editor>
-            <div class="recipe_details__categories"></div>
+            <div class="recipe_details__categories">
+                <RecipeCategoriesChackbox :recipe="recipe" />
+            </div>
 
             <div class="recipe_details__btn">
                 <div class="recipe_details__btn_OK">Zapisz</div>
@@ -47,6 +49,9 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+
+import RecipeCategoriesChackbox from './RecipeCategoriesCheckbox.vue';
+
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
@@ -83,7 +88,7 @@ export default {
             },
         };
     },
-    components: { Editor },
+    components: { Editor, RecipeCategoriesChackbox },
     methods: {
         ...mapMutations([
             'updateRecipes',
