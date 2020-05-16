@@ -87,7 +87,7 @@ export default {
             }
         },
         getNameHTML() {
-            console.log('refs', this.$refs);
+            console.log('refs', this.$refs.editorName.invoke('getMarkdown'));
         },
         onEditorNameStateChange(e) {
             console.log('event', e);
