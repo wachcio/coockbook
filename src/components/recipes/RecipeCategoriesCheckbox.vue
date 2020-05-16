@@ -7,9 +7,10 @@
             ><input
                 class="categories__checkbox"
                 type="checkbox"
-                :value="category.ID"
-                :checked="getChecked(category.ID)"
-            />{{ category.category_name }}</label
+                :value="category.category_name"
+                v-model="checkedCategories"
+            />
+            {{ category.category_name }}</label
         >
     </div>
 </template>
@@ -23,7 +24,7 @@ export default {
         recipe: Object,
     },
     data() {
-        return {};
+        return { checkedCategories: [] };
     },
     components: {},
     methods: {
@@ -41,9 +42,9 @@ export default {
             'getCategoriesJSON',
             'getCategoriesIDJSON',
         ]),
-        getChecked(id) {
-            return this.recipe.categories.find((el) => {
-                return el.ID == id;
+        setChecked() {
+            this.recipe.categories.map((el) => {
+                this.checkedCategories.push(el.category_name);
             });
         },
     },
@@ -58,7 +59,9 @@ export default {
         ]),
         ...mapGetters([]),
     },
-    created() {},
+    created() {
+        this.setChecked();
+    },
     watch: {},
 };
 </script>
