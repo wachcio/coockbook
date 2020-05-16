@@ -2,11 +2,14 @@
     <div class="categories">
         <label
             class="categories__label"
-            v-for="(category, index) in recipe.categories"
+            v-for="(category, index) in categories"
             :key="index"
-            ><input class="categories__checkbox" type="checkbox" />{{
-                category.category_name
-            }}</label
+            ><input
+                class="categories__checkbox"
+                type="checkbox"
+                :value="category.ID"
+                :checked="getChecked(category.ID)"
+            />{{ category.category_name }}</label
         >
     </div>
 </template>
@@ -38,6 +41,11 @@ export default {
             'getCategoriesJSON',
             'getCategoriesIDJSON',
         ]),
+        getChecked(id) {
+            return this.recipe.categories.find((el) => {
+                return el.ID == id;
+            });
+        },
     },
     computed: {
         ...mapState([
