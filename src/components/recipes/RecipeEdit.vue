@@ -3,6 +3,8 @@
         <div v-if="recipe">
             <Editor
                 class="recipe_details__name"
+                initialEditType="wysiwyg"
+                height="100px"
                 :options="editorOptions"
                 :initialValue="recipe.name"
                 ref="editorName"
@@ -11,18 +13,22 @@
 
             <Editor
                 class="recipe_details__description"
+                initialEditType="wysiwyg"
+                height="100px"
                 :initialValue="recipe.description"
                 :options="editorOptions"
             >
             </Editor>
             <Editor
                 class="recipe_details__ingredients"
+                initialEditType="wysiwyg"
                 :initialValue="recipe.ingredients"
                 :options="editorOptions"
             >
             </Editor>
             <Editor
                 class="recipe_details__execution"
+                initialEditType="wysiwyg"
                 :initialValue="recipe.execution"
                 :options="editorOptions"
             >
