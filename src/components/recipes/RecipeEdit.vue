@@ -41,7 +41,12 @@
                     @selectedCategories="selectedCategories"
                 />
             </div>
-
+            <StarRating
+                class="recipe_details__rating"
+                :toChange="true"
+                :rating="recipe.rating"
+                @setRating="setRating"
+            />
             <div class="recipe_details__btn">
                 <div class="recipe_details__btn_save" @click="getMarkdown()">
                     Zapisz
@@ -58,6 +63,7 @@
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 
 import RecipeCategoriesChackbox from './RecipeCategoriesCheckbox.vue';
+import StarRating from './StarRating.vue';
 
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -101,7 +107,7 @@ export default {
             },
         };
     },
-    components: { Editor, RecipeCategoriesChackbox },
+    components: { Editor, RecipeCategoriesChackbox, StarRating },
     methods: {
         ...mapMutations([
             'updateRecipes',
@@ -131,6 +137,11 @@ export default {
 
             this.editorsValue.categories = data;
         },
+        setRating(data) {
+            // console.log('data', data);
+
+            this.editorsValue.rating = data;
+        },
         getMarkdown() {
             let obj = {
                 name: this.$refs.editorName.invoke('getMarkdown'),
@@ -138,7 +149,7 @@ export default {
                 ingredients: this.$refs.editorIngredients.invoke('getMarkdown'),
                 execution: this.$refs.editorExecution.invoke('getMarkdown'),
                 picture: '',
-                rating: this.recipe.rating,
+                rating: this.editorsValue.rating,
                 category_id: this.editorsValue.categories.join(', '),
                 ID: this.recipe.ID,
             };
