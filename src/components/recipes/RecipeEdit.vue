@@ -44,7 +44,7 @@
             <StarRating
                 class="recipe_details__rating"
                 :toChange="true"
-                :rating="recipe.rating"
+                :rating="editorsValue.rating"
                 @setRating="setRating"
             />
             <div class="recipe_details__btn">
@@ -141,6 +141,7 @@ export default {
             // console.log('data', data);
 
             this.editorsValue.rating = data;
+            this.$forceUpdate();
         },
         getMarkdown() {
             let obj = {

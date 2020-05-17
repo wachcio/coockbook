@@ -39,23 +39,36 @@ export default {
     },
     components: {},
     methods: {
-        changeRating(stars) {
+        async changeRating(stars) {
             // console.log(stars);
-            this.$emit('setRating', stars);
+            await this.$emit('setRating', stars);
+            this.drawStars();
+            // this.$forceUpdate();
+        },
+        drawStars() {
+            this.ratingArray = [];
+            for (let i = 0; i < 5; i++) {
+                if (i < this.rating) {
+                    this.ratingArray.push('star star__selected');
+                } else {
+                    this.ratingArray.push('star');
+                }
+            }
         },
     },
     computed: {},
     created() {},
     mounted() {
-        for (let i = 0; i < 5; i++) {
-            if (i < this.rating) {
-                this.ratingArray.push('star star__selected');
-            } else {
-                this.ratingArray.push('star');
-            }
-        }
+        console.log(this.rating);
+
+        this.drawStars();
     },
-    watch: {},
+
+    watch: {
+        rating(newValue) {
+            this.changeRating(newValue);
+        },
+    },
 };
 </script>
 
@@ -81,6 +94,7 @@ export default {
     }
     &__to_change {
         :hover {
+            cursor: pointer;
             transform-origin: 50% 50%;
             transform: scale(1.5);
         }
