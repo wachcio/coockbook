@@ -8,7 +8,7 @@
                 class="categories__checkbox"
                 type="checkbox"
                 :value="parseInt(category.ID)"
-                v-model="checkedCategories"
+                v-model="selectedCategories"
             />
             {{ category.category_name }}</label
         >
@@ -24,7 +24,7 @@ export default {
         recipe: Object,
     },
     data() {
-        return { checkedCategories: [] };
+        return { selectedCategories: [] };
     },
     components: {},
     methods: {
@@ -44,7 +44,7 @@ export default {
         ]),
         setChecked() {
             this.recipe.categories.map((el) => {
-                this.checkedCategories.push(parseInt(el.ID));
+                this.selectedCategories.push(parseInt(el.ID));
             });
         },
     },
@@ -62,7 +62,13 @@ export default {
     created() {
         this.setChecked();
     },
-    watch: {},
+    watch: {
+        selectedCategories() {
+            console.log('watch', this.selectedCategories);
+
+            this.$emit('selectedCategories', this.selectedCategories);
+        },
+    },
 };
 </script>
 

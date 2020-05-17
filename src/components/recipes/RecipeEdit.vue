@@ -36,7 +36,10 @@
             >
             </Editor>
             <div class="recipe_details__categories">
-                <RecipeCategoriesChackbox :recipe="recipe" />
+                <RecipeCategoriesChackbox
+                    :recipe="recipe"
+                    @selectedCategories="selectedCategories"
+                />
             </div>
 
             <div class="recipe_details__btn">
@@ -120,6 +123,11 @@ export default {
                 });
                 this.recipe = this.recipes[index];
             }
+        },
+        selectedCategories(data) {
+            console.log('data', data);
+
+            this.editorsValue.categories = data;
         },
         getMarkdown() {
             // Aktualizacja przepisu
