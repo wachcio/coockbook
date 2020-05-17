@@ -1,12 +1,24 @@
 <template>
     <div class="star_wrapper">
-        <font-awesome-icon
-            v-for="(starClass, index) in 5"
-            :key="`star_${index}`"
-            :class="ratingArray[index]"
-            icon="star"
-            size="lg"
-        />
+        <template v-if="toChange == false">
+            <font-awesome-icon
+                v-for="(starClass, index) in 5"
+                :key="`star_${index}`"
+                :class="ratingArray[index]"
+                icon="star"
+                size="lg"
+            />
+        </template>
+        <template v-else>
+            <font-awesome-icon
+                v-for="(starClass, index) in 5"
+                :key="`star_${index}`"
+                :class="ratingArray[index]"
+                icon="star"
+                size="lg"
+                @click="changeRating(index)"
+            />
+        </template>
     </div>
 </template>
 
@@ -14,7 +26,11 @@
 export default {
     name: 'StarRecipeCard',
     props: {
-        rating: Number,
+        rating: {
+            type: Number,
+            required: true,
+        },
+        toChange: Boolean,
     },
     data() {
         return {
@@ -22,7 +38,11 @@ export default {
         };
     },
     components: {},
-    methods: {},
+    methods: {
+        changeRating(stars) {
+            console.log(stars);
+        },
+    },
     computed: {},
     created() {},
     mounted() {

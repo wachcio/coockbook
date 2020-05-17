@@ -8,14 +8,14 @@
     >
         <h2>{{ recipe.name }}</h2>
         <p v-html="recipe.description"></p>
-        <StarRecipeCard :rating="recipe.rating" />
+        <StarRating :rating="recipe.rating" />
         <font-awesome-icon class="utensils" icon="utensils" size="lg" />
         <font-awesome-icon class="pizza_slice" icon="pizza-slice" size="lg" />
     </router-link>
 </template>
 
 <script>
-import StarRecipeCard from './StarRecipeCard.vue';
+import StarRating from './StarRating.vue';
 let slug = require('slug');
 
 export default {
@@ -24,7 +24,7 @@ export default {
     data() {
         return {};
     },
-    components: { StarRecipeCard },
+    components: { StarRating },
     methods: {},
     computed: {
         getSlug() {

@@ -45,7 +45,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-import StarRating from './StarRecipeCard';
+import StarRating from './StarRating';
 
 let slug = require('slug');
 import _ from 'lodash';
