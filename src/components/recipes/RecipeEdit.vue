@@ -46,7 +46,9 @@
                 <div class="recipe_details__btn_save" @click="getMarkdown()">
                     Zapisz
                 </div>
-                <div class="recipe_details__btn_cancel">Anuluj</div>
+                <div class="recipe_details__btn_cancel" @click="cancelHandle()">
+                    Anuluj
+                </div>
             </div>
         </div>
     </div>
@@ -145,6 +147,9 @@ export default {
             this.$store.dispatch('updateRecipes', obj);
             this.$store.dispatch('getRecipesJSON');
             this.$store.dispatch('getRecipesByCategoryJSON');
+            this.$router.push({ name: 'home' });
+        },
+        cancelHandle() {
             this.$router.push({ name: 'home' });
         },
     },
