@@ -133,12 +133,17 @@ export default {
                 rating: recipes.rating,
                 category_id: recipes.category_id,
             })
-            .then(() => context.commit('updateRecipes', recipes));
+            .then(() => context.commit('updateRecipes', recipes))
+            .catch(() => {
+                alert('Coś poszło nie tak i nic nie zostało zaktualizowane :(');
+            });
     },
     deleteRecipes(context, ID) {
         // context.commit("isLoadedChange", false);
 
-        axios.delete(`${context.state.endpoints.recipesID}${ID}`);
+        axios.delete(`${context.state.endpoints.recipesID}${ID}`).catch(() => {
+            alert('Coś poszło nie tak i nic nie zostało usunięte :(');
+        });
         // .then((res) => context.commit('deleteRecipes', res.data));
     },
     deleteCategory(context, ID) {
