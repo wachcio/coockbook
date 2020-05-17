@@ -125,7 +125,7 @@ export default {
             }
         },
         selectedCategories(data) {
-            console.log('data', data);
+            // console.log('data', data);
 
             this.editorsValue.categories = data;
         },
@@ -143,15 +143,17 @@ export default {
 
             let obj = {
                 name: this.$refs.editorName.invoke('getMarkdown'),
+                description: this.$refs.editorDescription.invoke('getMarkdown'),
                 ingredients: this.$refs.editorIngredients.invoke('getMarkdown'),
                 execution: this.$refs.editorExecution.invoke('getMarkdown'),
                 picture: '',
                 rating: this.recipe.rating,
-                category_id: '16, 34, 2',
+                category_id: this.editorsValue.categories.join(', '),
                 ID: this.recipe.ID,
             };
-
             console.log(obj);
+
+            this.$store.dispatch('updateRecipes', obj);
         },
     },
     computed: {
@@ -170,6 +172,11 @@ export default {
                     return category.category_name;
                 })
                 .join(', ');
+        },
+        getCategoriesID() {
+            return this.recipe.categories.map((category) => {
+                return parseInt(category.ID);
+            });
         },
     },
     mounted() {

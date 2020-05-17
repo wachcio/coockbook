@@ -64,8 +64,6 @@ export default {
     },
     watch: {
         selectedCategories() {
-            console.log('watch', this.selectedCategories);
-
             this.$emit('selectedCategories', this.selectedCategories);
         },
     },
