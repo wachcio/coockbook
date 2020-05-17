@@ -19,6 +19,7 @@
                     class="recipe_details__modifications--delete"
                     icon="trash"
                     size="lg"
+                    @click="deleteRecipe()"
                 />
             </div>
             <p class="recipe_details__description">
@@ -81,6 +82,12 @@ export default {
                 });
                 this.recipe = this.recipes[index];
             }
+        },
+        deleteRecipe() {
+            this.$store.dispatch('deleteRecipes', this.recipe.ID);
+            this.$store.dispatch('getRecipesJSON');
+            this.$store.dispatch('getRecipesByCategoryJSON');
+            this.$router.push({ name: 'home' });
         },
     },
     computed: {
