@@ -130,17 +130,6 @@ export default {
             this.editorsValue.categories = data;
         },
         getMarkdown() {
-            // Aktualizacja przepisu
-            // this.$store.dispatch('updateRecipes', {
-            //     name: 'gofry5',
-            //     ingredients: 'składniki do gofrów',
-            //     execution: 'przepis na gofry',
-            //     picture: 'zdjęcie',
-            //     rating: 4,
-            //     category_id: '16, 34, 2',
-            //     ID: 44,
-            // });
-
             let obj = {
                 name: this.$refs.editorName.invoke('getMarkdown'),
                 description: this.$refs.editorDescription.invoke('getMarkdown'),
@@ -154,6 +143,9 @@ export default {
             console.log(obj);
 
             this.$store.dispatch('updateRecipes', obj);
+            this.$store.dispatch('getRecipesJSON');
+            this.$store.dispatch('getRecipesByCategoryJSON');
+            this.$router.push({ name: 'home' });
         },
     },
     computed: {
