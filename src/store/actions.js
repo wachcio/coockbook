@@ -10,7 +10,16 @@ export default {
         axios
             .get(`${context.state.endpoints.recipes}`)
 
-            .then((res) => context.commit('getRecipes', res.data));
+            .then((res) => context.commit('getRecipes', res.data))
+            .catch((e) =>
+                context.commit('getRecipes', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     getRecipesIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -18,14 +27,32 @@ export default {
         axios
             .get(`${context.state.endpoints.recipesID}${ID}`)
             // .then((res) => context.commit('getResponse', res.config))
-            .then((res) => context.commit('getRecipesID', res.data));
+            .then((res) => context.commit('getRecipesID', res.data))
+            .catch((e) =>
+                context.commit('getRecipesID', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     getRecipesByCategoryJSON(context) {
         // context.commit("isLoadedChange", false);
 
         axios
             .get(`${context.state.endpoints.recipesByCategory}`)
-            .then((res) => context.commit('getRecipesByCategory', res.data));
+            .then((res) => context.commit('getRecipesByCategory', res.data))
+            .catch((e) =>
+                context.commit('getRecipesByCategory', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     getRecipesByCategoryIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -55,14 +82,32 @@ export default {
 
         axios
             .get(`${context.state.endpoints.categories}`)
-            .then((res) => context.commit('getCategories', res.data));
+            .then((res) => context.commit('getCategories', res.data))
+            .catch((e) =>
+                context.commit('getCategories', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     getCategoriesIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
 
         axios
             .get(`${context.state.endpoints.categoriesID}${ID}`)
-            .then((res) => context.commit('getCategoriesID', res.data));
+            .then((res) => context.commit('getCategoriesID', res.data))
+            .catch((e) =>
+                context.commit('getCategoriesID', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
 
     addCategory(context, name) {
@@ -120,7 +165,16 @@ export default {
             .put(`${context.state.endpoints.categoriesID}${data.ID}`, {
                 category_name: data.category_name,
             })
-            .then(() => context.commit('updateCategory', data.category_name));
+            .then(() => context.commit('updateCategory', data.category_name))
+            .catch((e) =>
+                context.commit('updateCategory', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     updateRecipes(context, recipes) {
         axios
@@ -134,23 +188,47 @@ export default {
                 category_id: recipes.category_id,
             })
             .then(() => context.commit('updateRecipes', recipes))
-            .catch(() => {
-                alert('Coś poszło nie tak i nic nie zostało zaktualizowane :(');
-            });
+            .catch((e) =>
+                context.commit('updateRecipes', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     deleteRecipes(context, ID) {
         // context.commit("isLoadedChange", false);
 
-        axios.delete(`${context.state.endpoints.recipesID}${ID}`).catch(() => {
-            alert('Coś poszło nie tak i nic nie zostało usunięte :(');
-        });
-        // .then((res) => context.commit('deleteRecipes', res.data));
+        axios
+            .delete(`${context.state.endpoints.recipesID}${ID}`)
+            .then((res) => context.commit('deleteRecipes', res.data))
+            .catch((e) =>
+                context.commit('deleteRecipes', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     deleteCategory(context, ID) {
         // context.commit("isLoadedChange", false);
 
-        axios.delete(`${context.state.endpoints.categoriesID}${ID}`);
-        // .then((res) => context.commit('deleteCategory', res.data));
+        axios
+            .delete(`${context.state.endpoints.categoriesID}${ID}`)
+            .then((res) => context.commit('deleteCategory', res.data))
+            .catch((e) =>
+                context.commit('deleteCategory', {
+                    statusCode: e.response.status,
+                    type: 'error',
+                    msg: e.response.data.error,
+                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+                })
+            );
     },
     // },
 };
