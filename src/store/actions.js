@@ -9,6 +9,13 @@ const errorResponse = (e) => {
         // mySQLErrorMsg: e.response.data.msg.errorInfo[2],
     };
 };
+const okResponse = (e) => {
+    return {
+        statusCode: 200,
+        type: 'success',
+        msg: e.statusText,
+    };
+};
 
 export default {
     // actions: {
@@ -87,14 +94,13 @@ export default {
             .post(`${context.state.endpoints.categories}`, {
                 category_name: name,
             })
-            .then((res) =>
-                context.commit('addCategory', {
-                    statusCode: 200,
-                    type: 'success',
-                    msg: res.statusText,
-                })
-            )
-            .catch((e) => context.commit('addCategory', errorResponse(e)));
+            .then((res) => {
+                context.commit('addOperationStatus', okResponse(res));
+                return res;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+            });
     },
     addRecipes(context, recipes) {
         return axios
@@ -107,22 +113,26 @@ export default {
                 rating: recipes.rating,
                 category_id: recipes.category_id,
             })
-            .then((res) =>
-                context.commit('addRecipes', {
-                    statusCode: 200,
-                    type: 'success',
-                    msg: res.statusText,
-                })
-            )
-            .catch((e) => context.commit('addRecipes', errorResponse(e)));
+            .then((res) => {
+                context.commit('addOperationStatus', okResponse(res));
+                return res;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+            });
     },
     updateCategory(context, data) {
         axios
             .put(`${context.state.endpoints.categoriesID}${data.ID}`, {
                 category_name: data.category_name,
             })
-            .then(() => context.commit('updateCategory', data.category_name))
-            .catch((e) => context.commit('updateCategory', errorResponse(e)));
+            .then((res) => {
+                context.commit('addOperationStatus', okResponse(res));
+                return res;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+            });
     },
     updateRecipes(context, recipes) {
         axios
@@ -136,35 +146,36 @@ export default {
                 category_id: recipes.category_id,
             })
             .then((res) => {
-                context.commit('updateRecipes', {
-                    statusCode: 200,
-                    type: 'success',
-                    msg: res.statusText,
-                });
+                context.commit('addOperationStatus', okResponse(res));
                 return res;
             })
             .catch((e) => {
-                // console.log(e.response);
-
-                context.commit('updateRecipes', errorResponse(e));
-                return Promise.reject(e);
+                context.commit('addOperationStatus', errorResponse(e));
             });
     },
     deleteRecipes(context, ID) {
-        // context.commit("isLoadedChange", false);
-
         axios
             .delete(`${context.state.endpoints.recipesID}${ID}`)
-            .then((res) => context.commit('deleteRecipes', res.data))
-            .catch((e) => context.commit('deleteRecipes', errorResponse(e)));
+            .then((res) => {
+                context.commit('addOperationStatus', okResponse(res));
+                return res;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+            });
     },
     deleteCategory(context, ID) {
         // context.commit("isLoadedChange", false);
 
         axios
             .delete(`${context.state.endpoints.categoriesID}${ID}`)
-            .then((res) => context.commit('deleteCategory', res.data))
-            .catch((e) => context.commit('deleteCategory', errorResponse(e)));
+            .then((res) => {
+                context.commit('addOperationStatus', okResponse(res));
+                return res;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+            });
     },
     // },
 };

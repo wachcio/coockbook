@@ -25,19 +25,22 @@ export default {
     getResponse(state, payload) {
         console.log(payload);
     },
-    addCategory(state, payload) {
-        state.operationStatus = payload;
-    },
+    // addCategory(state, payload) {
+    //     state.operationStatus = payload;
+    // },
 
-    addRecipes(state, payload) {
-        state.operationStatus = payload;
-    },
-    updateCategory(state, payload) {
-        state.categories = { ...state.categories, payload };
-    },
+    // addRecipes(state, payload) {
+    //     state.operationStatus = payload;
+    // },
+    // updateCategory(state, payload) {
+    //     state.categories = { ...state.categories, payload };
+    // },
 
-    updateRecipes(state, payload) {
-        state.recipes = { ...state.recipes, payload };
+    // updateRecipes(state, payload) {
+    //     state.recipes = { ...state.recipes, payload };
+    // },
+    addOperationStatus(state, payload) {
+        state.operationStatus = payload;
     },
     // },
 };
