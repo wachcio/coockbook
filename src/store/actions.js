@@ -22,27 +22,23 @@ export default {
     // Akcje są asynhroniczne np do JSON-a
     // akcje wywołujemy za pomocą dispatch z innych komponentów
     getRecipesJSON(context) {
-        // context.commit("isLoadedChange", false);
-
-        axios
+        return axios
             .get(`${context.state.endpoints.recipes}`)
 
             .then((res) => context.commit('getRecipes', res.data))
             .catch((e) => context.commit('getRecipes', errorResponse(e)));
     },
     getRecipesIDJSON(context, ID) {
-        // context.commit("isLoadedChange", false);
-
-        axios
-            .get(`${context.state.endpoints.recipesID}${ID}`)
-            // .then((res) => context.commit('getResponse', res.config))
-            .then((res) => context.commit('getRecipesID', res.data))
-            .catch((e) => context.commit('getRecipesID', errorResponse(e)));
+        return (
+            axios
+                .get(`${context.state.endpoints.recipesID}${ID}`)
+                // .then((res) => context.commit('getResponse', res.config))
+                .then((res) => context.commit('getRecipesID', res.data))
+                .catch((e) => context.commit('getRecipesID', errorResponse(e)))
+        );
     },
     getRecipesByCategoryJSON(context) {
-        // context.commit("isLoadedChange", false);
-
-        axios
+        return axios
             .get(`${context.state.endpoints.recipesByCategory}`)
             .then((res) => context.commit('getRecipesByCategory', res.data))
             .catch((e) =>
@@ -73,17 +69,13 @@ export default {
         context.commit('getRecipesByCategoryID', result);
     },
     getCategoriesJSON(context) {
-        // context.commit("isLoadedChange", false);
-
-        axios
+        return axios
             .get(`${context.state.endpoints.categories}`)
             .then((res) => context.commit('getCategories', res.data))
             .catch((e) => context.commit('getCategories', errorResponse(e)));
     },
     getCategoriesIDJSON(context, ID) {
-        // context.commit("isLoadedChange", false);
-
-        axios
+        return axios
             .get(`${context.state.endpoints.categoriesID}${ID}`)
             .then((res) => context.commit('getCategoriesID', res.data))
             .catch((e) => context.commit('getCategoriesID', errorResponse(e)));
@@ -122,7 +114,7 @@ export default {
             });
     },
     updateCategory(context, data) {
-        axios
+        return axios
             .put(`${context.state.endpoints.categoriesID}${data.ID}`, {
                 category_name: data.category_name,
             })
@@ -135,7 +127,7 @@ export default {
             });
     },
     updateRecipes(context, recipes) {
-        axios
+        return axios
             .put(`${context.state.endpoints.recipesID}${recipes.ID}`, {
                 name: recipes.name,
                 description: recipes.description,
@@ -151,10 +143,11 @@ export default {
             })
             .catch((e) => {
                 context.commit('addOperationStatus', errorResponse(e));
+                return e;
             });
     },
     deleteRecipes(context, ID) {
-        axios
+        return axios
             .delete(`${context.state.endpoints.recipesID}${ID}`)
             .then((res) => {
                 context.commit('addOperationStatus', okResponse(res));
@@ -165,9 +158,7 @@ export default {
             });
     },
     deleteCategory(context, ID) {
-        // context.commit("isLoadedChange", false);
-
-        axios
+        return axios
             .delete(`${context.state.endpoints.categoriesID}${ID}`)
             .then((res) => {
                 context.commit('addOperationStatus', okResponse(res));

@@ -83,8 +83,10 @@ export default {
                 this.recipe = this.recipes[index];
             }
         },
-        deleteRecipe() {
-            this.$store.dispatch('deleteRecipes', this.recipe.ID);
+        async deleteRecipe() {
+            await this.$store.dispatch('deleteRecipes', this.recipe.ID);
+            console.log(this.operationStatus.statusCode);
+
             this.$store.dispatch('getRecipesJSON');
             this.$store.dispatch('getRecipesByCategoryJSON');
             this.$router.push({ name: 'home' });
@@ -98,6 +100,7 @@ export default {
             'recipesByCategory',
             'categories',
             'categoriesID',
+            'operationStatus',
         ]),
         ...mapGetters([]),
         getCategories() {

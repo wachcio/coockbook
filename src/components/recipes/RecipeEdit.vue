@@ -48,7 +48,7 @@
                 @setRating="setRating"
             />
             <div class="recipe_details__btn">
-                <div class="recipe_details__btn_save" @click="getMarkdown()">
+                <div class="recipe_details__btn_save" @click="sendData()">
                     Zapisz
                 </div>
                 <div class="recipe_details__btn_cancel" @click="cancelHandle()">
@@ -143,8 +143,8 @@ export default {
             this.editorsValue.rating = data;
             this.$forceUpdate();
         },
-        getMarkdown() {
-            let obj = {
+        async sendData() {
+            const obj = {
                 name: this.$refs.editorName.invoke('getMarkdown'),
                 description: this.$refs.editorDescription.invoke('getMarkdown'),
                 ingredients: this.$refs.editorIngredients.invoke('getMarkdown'),
@@ -154,9 +154,12 @@ export default {
                 category_id: this.editorsValue.categories.join(', '),
                 ID: this.recipe.ID,
             };
-            console.log(obj);
+            // console.log(obj);
 
-            this.$store.dispatch('updateRecipes', obj);
+            await this.$store.dispatch('updateRecipes', obj);
+
+            console.log(this.operationStatus.statusCode);
+
             this.$store.dispatch('getRecipesJSON');
             this.$store.dispatch('getRecipesByCategoryJSON');
             this.$router.push({ name: 'home' });
@@ -173,6 +176,7 @@ export default {
             'recipesByCategory',
             'categories',
             'categoriesID',
+            'operationStatus',
         ]),
         ...mapGetters([]),
         getCategories() {

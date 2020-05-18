@@ -40,7 +40,8 @@ export default {
     //     state.recipes = { ...state.recipes, payload };
     // },
     addOperationStatus(state, payload) {
-        state.operationStatus = payload;
+        state.operationStatus = { ...payload };
+        return state.operationStatus;
     },
     // },
 };
