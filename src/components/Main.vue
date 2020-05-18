@@ -1,6 +1,15 @@
 <template>
     <div class="container">
         <h1>Książka kucharska</h1>
+        <router-link
+            :to="{
+                name: 'recipeAdd',
+            }"
+            class="recipe_add"
+        >
+            <font-awesome-icon icon="plus" size="lg" class="recipe_add__icon" />
+            Dodaj przepis
+        </router-link>
         <router-view></router-view>
     </div>
 </template>
@@ -107,6 +116,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../style/main.scss';
 .container {
     width: 100%;
     height: 100vh;
@@ -117,5 +127,16 @@ export default {
 h1 {
     text-align: center;
     margin: 1em 0;
+}
+.recipe_add {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    text-decoration: none;
+    color: $fontColor;
+
+    &__icon {
+        color: green;
+    }
 }
 </style>
