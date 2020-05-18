@@ -6,6 +6,7 @@
                 name: 'recipeAdd',
             }"
             class="recipe_add"
+            exact
         >
             <font-awesome-icon icon="plus" size="lg" class="recipe_add__icon" />
             Dodaj przepis

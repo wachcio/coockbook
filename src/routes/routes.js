@@ -9,6 +9,12 @@ export default [
         component: Home,
     },
     {
+        path: '/recipe/add',
+        name: 'recipeAdd',
+        component: RecipeAdd,
+        props: true,
+    },
+    {
         path: '/recipe/:slug',
         name: 'recipeDetail',
         component: RecipeDetail,
@@ -18,12 +24,6 @@ export default [
         path: '/recipe/edit/:slug',
         name: 'recipeEdit',
         component: RecipeEdit,
-        props: true,
-    },
-    {
-        path: '/recipe/add',
-        name: 'recipeAdd',
-        component: RecipeAdd,
         props: true,
     },
 ];

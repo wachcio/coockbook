@@ -1,59 +1,53 @@
 <template>
     <div class="recipe_details">
-        <div v-if="recipe">
-            <Editor
-                class="recipe_details__name"
-                initialEditType="wysiwyg"
-                height="100px"
-                :options="editorOptions"
-                :initialValue="recipe.name"
-                ref="editorName"
-            ></Editor>
+        <Editor
+            class="recipe_details__name"
+            initialEditType="wysiwyg"
+            height="100px"
+            :options="editorOptions"
+            ref="editorName"
+        ></Editor>
 
-            <Editor
-                class="recipe_details__description"
-                initialEditType="wysiwyg"
-                height="100px"
-                :initialValue="recipe.description"
-                :options="editorOptions"
-                ref="editorDescription"
-            >
-            </Editor>
-            <Editor
-                class="recipe_details__ingredients"
-                initialEditType="wysiwyg"
-                :initialValue="recipe.ingredients"
-                :options="editorOptions"
-                ref="editorIngredients"
-            >
-            </Editor>
-            <Editor
-                class="recipe_details__execution"
-                initialEditType="wysiwyg"
-                :initialValue="recipe.execution"
-                :options="editorOptions"
-                ref="editorExecution"
-            >
-            </Editor>
-            <div class="recipe_details__categories">
-                <RecipeCategoriesChackbox
-                    :recipe="recipe"
-                    @selectedCategories="selectedCategories"
-                />
-            </div>
-            <StarRating
-                class="recipe_details__rating"
-                :toChange="true"
-                :rating="editorsValue.rating"
-                @setRating="setRating"
+        <Editor
+            class="recipe_details__description"
+            initialEditType="wysiwyg"
+            height="100px"
+            :options="editorOptions"
+            ref="editorDescription"
+        >
+        </Editor>
+        <Editor
+            class="recipe_details__ingredients"
+            initialEditType="wysiwyg"
+            :options="editorOptions"
+            ref="editorIngredients"
+        >
+        </Editor>
+        <Editor
+            class="recipe_details__execution"
+            initialEditType="wysiwyg"
+            :options="editorOptions"
+            ref="editorExecution"
+        >
+        </Editor>
+        <div class="recipe_details__categories">
+            <RecipeCategoriesChackbox
+                :recipe="categories"
+                @selectedCategories="selectedCategories"
             />
-            <div class="recipe_details__btn">
-                <div class="recipe_details__btn_save" @click="sendData()">
-                    Zapisz
-                </div>
-                <div class="recipe_details__btn_cancel" @click="cancelHandle()">
-                    Anuluj
-                </div>
+        </div>
+        <StarRating
+            class="recipe_details__rating"
+            :toChange="true"
+            :rating="editorsValue.rating"
+            @setRating="setRating"
+        />
+        <div class="recipe_details__btn">
+            <div class="recipe_details__btn_save" @click="sendData()">
+                Zapisz
+            </div>
+            <div class="recipe_details__btn_cancel" @click="cancelHandle()">
+                Anuluj
             </div>
         </div>
     </div>
@@ -70,13 +64,10 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 
 import { Editor } from '@toast-ui/vue-editor';
 
-let slug = require('slug');
-import _ from 'lodash';
+// import _ from 'lodash';
 export default {
     name: 'RecipeAdd',
-    props: {
-        recipe: Object,
-    },
+    props: {},
     data() {
         return {
             editorOptions: {
@@ -123,15 +114,7 @@ export default {
             'getCategoriesJSON',
             'getCategoriesIDJSON',
         ]),
-        checkRecipe() {
-            if (!this.recipe) {
-                let index = null;
-                index = _.findIndex(this.recipes, (o) => {
-                    return slug(o.name) == this.$route.params.slug;
-                });
-                this.recipe = this.recipes[index];
-            }
-        },
+
         selectedCategories(data) {
             // console.log('data', data);
 
@@ -167,6 +150,17 @@ export default {
         cancelHandle() {
             this.$router.push({ name: 'home' });
         },
+        refreshData(type = 'all') {
+            if (type == 'recipes' || type == 'all') {
+                this.$store.dispatch('getRecipesJSON');
+                // this.$store.dispatch('getRecipesIDJSON', 2);
+                this.$store.dispatch('getRecipesByCategoryJSON');
+            }
+            if (type == 'categories' || type == 'all') {
+                this.$store.dispatch('getCategoriesJSON');
+                // this.$store.dispatch('getCategoriesIDJSON', 3);
+            } else this.refreshData();
+        },
     },
     computed: {
         ...mapState([
@@ -179,44 +173,23 @@ export default {
             'operationStatus',
         ]),
         ...mapGetters([]),
-        getCategories() {
-            return this.recipe.categories
-                .map((category) => {
-                    return category.category_name;
-                })
-                .join(', ');
-        },
-        getCategoriesID() {
-            return this.recipe.categories.map((category) => {
-                return parseInt(category.ID);
-            });
-        },
+        // getCategories() {
+        //     return this.recipe.categories
+        //         .map((category) => {
+        //             return category.category_name;
+        //         })
+        //         .join(', ');
+        // },
+        // getCategoriesID() {
+        //     return this.recipe.categories.map((category) => {
+        //         return parseInt(category.ID);
+        //     });
+        // },
     },
-    mounted() {
-        this.checkRecipe();
-        // this.editorsValue.name = this.recipe.name;
-        // this.editorsValue.description = this.recipe.description;
-        // this.editorsValue.execution = this.recipe.execution;
-        // this.editorsValue.ingredients = this.recipe.ingredients;
-        // this.editorsValue.rating = this.recipe.rating;
-        // this.editorsValue.picture = this.recipe.picture;
-        this.editorsValue = { ...this.recipe };
+    created() {
+        if (!this.categories) this.refreshData();
     },
-    watch: {
-        recipe: function() {
-            this.editorsValue = { ...this.recipe };
-        },
-        recipes: function() {
-            this.checkRecipe();
-            this.editorsValue = { ...this.recipe };
-            // this.editorsValue.name = this.recipe.name;
-            // this.editorsValue.description = this.recipe.description;
-            // this.editorsValue.execution = this.recipe.execution;
-            // this.editorsValue.ingredients = this.recipe.ingredients;
-            // this.editorsValue.rating = this.recipe.rating;
-            // this.editorsValue.picture = this.recipe.picture;
-        },
-    },
+    watch: {},
 };
 </script>
 
