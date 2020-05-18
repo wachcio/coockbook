@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+const errorResponse = (e) => {
+    return {
+        statusCode: e.response.status,
+        type: 'error',
+        msg: e.response.data.error,
+        // mySQLErrorNumber: e.response.data.msg.errorInfo[0],
+        // mySQLErrorMsg: e.response.data.msg.errorInfo[2],
+    };
+};
+
 export default {
     // actions: {
     // Akcje są asynhroniczne np do JSON-a
@@ -11,15 +21,7 @@ export default {
             .get(`${context.state.endpoints.recipes}`)
 
             .then((res) => context.commit('getRecipes', res.data))
-            .catch((e) =>
-                context.commit('getRecipes', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('getRecipes', errorResponse(e)));
     },
     getRecipesIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -28,15 +30,7 @@ export default {
             .get(`${context.state.endpoints.recipesID}${ID}`)
             // .then((res) => context.commit('getResponse', res.config))
             .then((res) => context.commit('getRecipesID', res.data))
-            .catch((e) =>
-                context.commit('getRecipesID', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('getRecipesID', errorResponse(e)));
     },
     getRecipesByCategoryJSON(context) {
         // context.commit("isLoadedChange", false);
@@ -45,13 +39,7 @@ export default {
             .get(`${context.state.endpoints.recipesByCategory}`)
             .then((res) => context.commit('getRecipesByCategory', res.data))
             .catch((e) =>
-                context.commit('getRecipesByCategory', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
+                context.commit('getRecipesByCategory', errorResponse(e))
             );
     },
     getRecipesByCategoryIDJSON(context, ID) {
@@ -83,15 +71,7 @@ export default {
         axios
             .get(`${context.state.endpoints.categories}`)
             .then((res) => context.commit('getCategories', res.data))
-            .catch((e) =>
-                context.commit('getCategories', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('getCategories', errorResponse(e)));
     },
     getCategoriesIDJSON(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -99,15 +79,7 @@ export default {
         axios
             .get(`${context.state.endpoints.categoriesID}${ID}`)
             .then((res) => context.commit('getCategoriesID', res.data))
-            .catch((e) =>
-                context.commit('getCategoriesID', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('getCategoriesID', errorResponse(e)));
     },
 
     addCategory(context, name) {
@@ -122,15 +94,7 @@ export default {
                     msg: res.statusText,
                 })
             )
-            .catch((e) =>
-                context.commit('addCategory', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('addCategory', errorResponse(e)));
     },
     addRecipes(context, recipes) {
         return axios
@@ -150,15 +114,7 @@ export default {
                     msg: res.statusText,
                 })
             )
-            .catch((e) =>
-                context.commit('addRecipes', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('addRecipes', errorResponse(e)));
     },
     updateCategory(context, data) {
         axios
@@ -166,15 +122,7 @@ export default {
                 category_name: data.category_name,
             })
             .then(() => context.commit('updateCategory', data.category_name))
-            .catch((e) =>
-                context.commit('updateCategory', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('updateCategory', errorResponse(e)));
     },
     updateRecipes(context, recipes) {
         axios
@@ -187,16 +135,20 @@ export default {
                 rating: recipes.rating,
                 category_id: recipes.category_id,
             })
-            .then(() => context.commit('updateRecipes', recipes))
-            .catch((e) =>
+            .then((res) => {
                 context.commit('updateRecipes', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+                    statusCode: 200,
+                    type: 'success',
+                    msg: res.statusText,
+                });
+                return res;
+            })
+            .catch((e) => {
+                // console.log(e.response);
+
+                context.commit('updateRecipes', errorResponse(e));
+                return Promise.reject(e);
+            });
     },
     deleteRecipes(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -204,15 +156,7 @@ export default {
         axios
             .delete(`${context.state.endpoints.recipesID}${ID}`)
             .then((res) => context.commit('deleteRecipes', res.data))
-            .catch((e) =>
-                context.commit('deleteRecipes', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('deleteRecipes', errorResponse(e)));
     },
     deleteCategory(context, ID) {
         // context.commit("isLoadedChange", false);
@@ -220,15 +164,7 @@ export default {
         axios
             .delete(`${context.state.endpoints.categoriesID}${ID}`)
             .then((res) => context.commit('deleteCategory', res.data))
-            .catch((e) =>
-                context.commit('deleteCategory', {
-                    statusCode: e.response.status,
-                    type: 'error',
-                    msg: e.response.data.error,
-                    mySQLErrorNumber: e.response.data.msg.errorInfo[0],
-                    mySQLErrorMsg: e.response.data.msg.errorInfo[2],
-                })
-            );
+            .catch((e) => context.commit('deleteCategory', errorResponse(e)));
     },
     // },
 };

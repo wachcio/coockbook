@@ -59,7 +59,7 @@ export default {
     computed: {},
     created() {},
     mounted() {
-        console.log(this.rating);
+        // console.log(this.rating);
 
         this.drawStars();
     },
