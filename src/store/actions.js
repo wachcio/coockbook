@@ -58,15 +58,18 @@ export default {
             return o[0].ID == ID ? (result = o[1]) : undefined;
         });
 
-        result.map((o) => {
-            const id = o.recipes_id;
+        if (Object.keys(result).length !== 0) {
+            result.map((o) => {
+                const id = o.recipes_id;
 
-            context.state.recipes.map((o2) => {
-                o2.ID == id ? (o.categories = o2.categories) : null;
+                context.state.recipes.map((o2) => {
+                    o2.ID == id ? (o.categories = o2.categories) : null;
+                });
             });
-        });
-
-        context.commit('getRecipesByCategoryID', result);
+            context.commit('getRecipesByCategoryID', result);
+        } else {
+            context.commit('getRecipesByCategoryID', {});
+        }
     },
     getCategoriesJSON(context) {
         return axios
