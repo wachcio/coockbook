@@ -41,7 +41,7 @@
             class="recipe_details__rating"
             :toChange="true"
             :rating="editorsValue.rating"
-            @setRating="0"
+            @setRating="setRating"
         />
         <div class="recipe_details__btn">
             <div class="recipe_details__btn_save" @click="sendData()">
