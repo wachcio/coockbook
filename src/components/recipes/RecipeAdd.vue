@@ -1,5 +1,6 @@
 <template>
     <div class="recipe_details">
+        <h2>Dodaj przepis</h2>
         <Editor
             class="recipe_details__name"
             initialEditType="wysiwyg"
@@ -32,7 +33,7 @@
         </Editor>
         <div class="recipe_details__categories">
             <RecipeCategoriesChackbox
-                :recipe="categories"
+                :recipe="{ categories: [] }"
                 @selectedCategories="selectedCategories"
             />
         </div>
@@ -40,7 +41,7 @@
             class="recipe_details__rating"
             :toChange="true"
             :rating="editorsValue.rating"
-            @setRating="setRating"
+            @setRating="0"
         />
         <div class="recipe_details__btn">
             <div class="recipe_details__btn_save" @click="sendData()">
@@ -135,11 +136,10 @@ export default {
                 picture: '',
                 rating: this.editorsValue.rating,
                 category_id: this.editorsValue.categories.join(', '),
-                ID: this.recipe.ID,
             };
             // console.log(obj);
 
-            await this.$store.dispatch('updateRecipes', obj);
+            await this.$store.dispatch('addRecipes', obj);
 
             console.log(this.operationStatus.statusCode);
 
@@ -212,6 +212,10 @@ export default {
         margin: 0.5em 0;
         border-bottom: darken($color: $primaryColor, $amount: 30) 2px solid;
     }
+}
+
+h2 {
+    text-align: center;
 }
 
 .recipe_details {
