@@ -4,16 +4,20 @@ const errorResponse = (e) => {
     return {
         statusCode: e.response.status,
         type: 'error',
-        msg: e.response.data.error,
+        msgPL: e.response.data.error,
+        msgEN: e.response.data.error,
         // mySQLErrorNumber: e.response.data.msg.errorInfo[0],
         // mySQLErrorMsg: e.response.data.msg.errorInfo[2],
     };
 };
 const okResponse = (e) => {
+    console.log(e);
+
     return {
         statusCode: 200,
         type: 'success',
-        msg: e.statusText,
+        msgPL: e.data.msgPL,
+        msgEN: e.data.msgEN,
     };
 };
 

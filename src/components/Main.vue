@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Message />
         <h1>Książka kucharska</h1>
         <router-link
             :to="{
@@ -17,6 +18,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+import Message from './Message.vue';
 // import _ from 'lodash';
 export default {
     name: 'Main',
@@ -24,7 +26,7 @@ export default {
     data() {
         return {};
     },
-    components: {},
+    components: { Message },
     methods: {
         ...mapMutations([
             'updateRecipes',
