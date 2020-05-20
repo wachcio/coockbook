@@ -1,17 +1,18 @@
 import axios from 'axios';
 
 const errorResponse = (e) => {
+    // console.log(e.response);
     return {
         statusCode: e.response.status,
         type: 'error',
-        msgPL: e.response.data.error,
-        msgEN: e.response.data.error,
+        msgPL: e.response.data.msgPL,
+        msgEN: e.response.data.msgEN,
         // mySQLErrorNumber: e.response.data.msg.errorInfo[0],
         // mySQLErrorMsg: e.response.data.msg.errorInfo[2],
     };
 };
 const okResponse = (e) => {
-    console.log(e);
+    // console.log(e);
 
     return {
         statusCode: 200,
