@@ -17,4 +17,5 @@ export default {
 
 <style lang="scss">
 @import './style/main.scss';
+@import './style/vuejsDialog/vuejsDialogCustom.scss';
 </style>

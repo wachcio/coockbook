@@ -84,12 +84,19 @@ export default {
             }
         },
         async deleteRecipe() {
-            await this.$store.dispatch('deleteRecipes', this.recipe.ID);
-            console.log(this.operationStatus.statusCode);
+            this.$dialog
+                .confirm(`Czy na pewno chcesz usunąć '${this.recipe.name}'?`)
+                .then(async () => {
+                    await this.$store.dispatch('deleteRecipes', this.recipe.ID);
+                    console.log(this.operationStatus.statusCode);
 
-            this.$store.dispatch('getRecipesJSON');
-            this.$store.dispatch('getRecipesByCategoryJSON');
-            this.$router.push({ name: 'home' });
+                    this.$store.dispatch('getRecipesJSON');
+                    this.$store.dispatch('getRecipesByCategoryJSON');
+                    this.$router.push({ name: 'home' });
+                })
+                .catch(function() {
+                    console.log('Clicked on cancel');
+                });
         },
     },
     computed: {
