@@ -7,7 +7,9 @@
         class="recipe_wrapper"
     >
         <h2>{{ recipe.name }}</h2>
-        <p v-html="recipe.description"></p>
+        <div class="recipe_description">
+            <p class="recipe_description__text" v-html="recipe.description"></p>
+        </div>
         <StarRating :rating="recipe.rating" />
         <font-awesome-icon class="utensils" icon="utensils" size="lg" />
         <font-awesome-icon class="pizza_slice" icon="pizza-slice" size="lg" />
@@ -39,6 +41,7 @@ export default {
 <style lang="scss" scoped>
 @import './../../style/main.scss';
 .racipe_wrapper {
+    overflow: hidden;
 }
 h2 {
     text-align: center;
@@ -46,6 +49,15 @@ h2 {
     font-weight: 700;
     margin-bottom: 0.5em;
     text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.25);
+}
+.recipe_description {
+    overflow: hidden;
+}
+.recipe_description__text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
 }
 .utensils,
 .pizza_slice {

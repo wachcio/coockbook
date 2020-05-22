@@ -95,6 +95,7 @@ export default {
     transition: 0.2s;
     transform: translate(0, 0);
     box-shadow: 10px 10px 19px -8px rgba(0, 0, 0, 0.36);
+    max-width: 400px;
 
     &:hover {
         box-shadow: 13px 13px 19px -8px rgba(0, 0, 0, 0.6);
