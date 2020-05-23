@@ -129,7 +129,7 @@ export default {
         },
         async sendData() {
             const obj = {
-                name: this.$refs.editorName.invoke('getMarkdown'),
+                name: this.$refs.editorName.invoke('getMarkdown').toLowerCase(),
                 description: this.$refs.editorDescription.invoke('getMarkdown'),
                 ingredients: this.$refs.editorIngredients.invoke('getMarkdown'),
                 execution: this.$refs.editorExecution.invoke('getMarkdown'),
