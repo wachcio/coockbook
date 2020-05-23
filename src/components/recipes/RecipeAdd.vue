@@ -5,7 +5,7 @@
             class="recipe_details__name"
             initialEditType="wysiwyg"
             height="100px"
-            :options="editorOptions"
+            :options="editorOptionsTitle"
             ref="editorName"
         ></Editor>
 
@@ -74,7 +74,6 @@ export default {
             editorOptions: {
                 language: 'pl-PL',
                 toolbarItems: [
-                    'heading',
                     'bold',
                     'italic',
                     'strike',
@@ -88,6 +87,7 @@ export default {
                     'link',
                 ],
             },
+            editorOptionsTitle: { toolbarItems: [] },
             editorsValue: {
                 name: '',
                 description: '',
