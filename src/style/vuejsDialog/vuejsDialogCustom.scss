@@ -400,16 +400,31 @@
 //     border-bottom: 1px solid #FF8C00;
 //   }
 
+@import './../main.scss';
+
 .dg-btn--cancel {
-    color: $fontColor;
-    background-color: $primaryColor;
-    border-color: $fontColor;
+    // color: $fontColor;
+    // background-color: $primaryColor;
+    // border-color: $fontColor;
+    color: white;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #008900, #007300);
+    box-shadow: 3px 3px 7px #007c00, -3px -3px 7px #008400;
+    padding: 0.3em;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 .dg-btn--ok {
-    color: white;
-    background-color: red;
-    border-color: red;
-    // border: none;
+    color: white !important;
+    // background-color: red;
+    // border-color: red;
+    border-radius: 6px !important;
+    background: linear-gradient(145deg, #ff0000, #e60000) !important;
+    box-shadow: 3px 3px 7px #f70000, -3px -3px 7px #ff0000 !important;
+    border-color: transparent !important;
+    border: none !important;
 }
 .dg-container {
     font-family: $fontFamily;
@@ -431,7 +446,7 @@
     padding: 15px;
     border-radius: 5px;
     margin: 25px auto;
-    background-color: $primaryColor;
+    background-color: $primaryColor !important;
 }
 .dg-content {
     font-size: 16px;
