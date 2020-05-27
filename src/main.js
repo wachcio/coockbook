@@ -36,7 +36,7 @@ library.add(faPen);
 library.add(faTrash);
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes,
 });
 

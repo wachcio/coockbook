@@ -131,6 +131,12 @@ export default {
     },
 };
 </script>
+<style lang="scss">
+ul,
+ol {
+    margin-left: 1em;
+}
+</style>
 
 <style lang="scss" scoped>
 @import './../../style/main.scss';
@@ -222,8 +228,5 @@ export default {
         bottom: auto;
         padding: 2em 0 1em 0;
     }
-}
-li {
-    margin-left: 2em;
 }
 </style>
