@@ -82,7 +82,6 @@ export default {
             editorOptions: {
                 language: 'pl-PL',
                 toolbarItems: [
-                    'heading',
                     'bold',
                     'italic',
                     'strike',
