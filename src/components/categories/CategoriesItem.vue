@@ -1,24 +1,18 @@
 <template>
-    <div v-if="isLoaded" class="categories_list">
-        <CategoriesItem
-            v-for="(category, index) in categories"
-            :key="index"
-            :category="category"
-        >
-        </CategoriesItem>
+    <div class="category__item">
+        {{ category.category_name }}
     </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-import CategoriesItem from './CategoriesItem.vue';
 export default {
-    name: 'CategoriesList',
-    props: {},
+    name: 'CategoriesItem',
+    props: { category: Object },
     data() {
         return {};
     },
-    components: { CategoriesItem },
+    components: {},
     methods: {
         ...mapMutations([
             'updateRecipes',
