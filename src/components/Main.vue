@@ -2,16 +2,7 @@
     <div class="container">
         <Message />
         <h1>Książka kucharska</h1>
-        <router-link
-            :to="{
-                name: 'recipeAdd',
-            }"
-            class="recipe_add"
-            exact
-        >
-            <font-awesome-icon icon="plus" size="lg" class="recipe_add__icon" />
-            Dodaj przepis
-        </router-link>
+        <Menu />
         <router-view></router-view>
     </div>
 </template>
@@ -19,6 +10,7 @@
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import Message from './Message.vue';
+import Menu from './Menu.vue';
 // import _ from 'lodash';
 export default {
     name: 'Main',
@@ -26,7 +18,7 @@ export default {
     data() {
         return {};
     },
-    components: { Message },
+    components: { Message, Menu },
     methods: {
         ...mapMutations([
             'updateRecipes',
@@ -130,16 +122,5 @@ export default {
 h1 {
     text-align: center;
     margin: 1em 0;
-}
-.recipe_add {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    text-decoration: none;
-    color: $fontColor;
-
-    &__icon {
-        color: green;
-    }
 }
 </style>

@@ -23,6 +23,7 @@ import {
     faPlus,
     faPen,
     faTrash,
+    faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -34,6 +35,7 @@ library.add(faPizzaSlice);
 library.add(faPlus);
 library.add(faPen);
 library.add(faTrash);
+library.add(faArrowLeft);
 
 const router = new VueRouter({
     // mode: 'history',
