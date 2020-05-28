@@ -18,6 +18,15 @@
             <font-awesome-icon icon="plus" size="lg" class="recipe_add__icon" />
             Dodaj przepis
         </router-link>
+        <router-link
+            :to="{
+                name: 'categoriesList',
+            }"
+            class="categories_list"
+            exact
+        >
+            Kategorie
+        </router-link>
     </div>
 </template>
 
@@ -43,7 +52,8 @@ export default {
 <style lang="scss" scoped>
 @import './../style/main.scss';
 .recipe_add,
-.history_back {
+.history_back,
+.categories_list {
     position: absolute;
     top: 1em;
     right: 1em;
@@ -54,7 +64,9 @@ export default {
         color: green;
     }
 }
-
+.categories_list {
+    top: 2.2em;
+}
 .history_back {
     right: auto;
     left: 1em;
