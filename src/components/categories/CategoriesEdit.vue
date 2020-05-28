@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 export default {
     name: 'CategoriesEdit',
     props: {},
@@ -10,8 +11,33 @@ export default {
         return {};
     },
     components: {},
-    methods: {},
-    computed: {},
+    methods: {
+        ...mapMutations([
+            'updateRecipes',
+            'updateRecipesID',
+            'updateRecipesByCategory',
+            'updateCategiories',
+            'updateCategioriesID',
+        ]),
+        ...mapActions([
+            'getRecipesJSON',
+            'getRecipesIDJSON',
+            'getRecipesByCategoryJSON',
+            'getCategoriesJSON',
+            'getCategoriesIDJSON',
+        ]),
+    },
+    computed: {
+        ...mapState([
+            'endpoints',
+            'recipes',
+            'recipesID',
+            'recipesByCategory',
+            'categories',
+            'categoriesID',
+        ]),
+        ...mapGetters([]),
+    },
     created() {},
     watch: {},
 };
