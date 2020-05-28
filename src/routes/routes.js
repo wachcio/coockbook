@@ -31,19 +31,19 @@ export default [
     },
     {
         path: '/categories',
-        name: 'categories_list',
+        name: 'categoriesList',
         component: CategoriesList,
         props: true,
     },
     {
         path: '/categories/add',
-        name: 'categories_add',
+        name: 'categoriesAdd',
         component: CategoriesAdd,
         props: true,
     },
     {
         path: '/categories/edit/:slug',
-        name: 'categories_edit',
+        name: 'categoriesEdit',
         component: CategoriesEdit,
         props: true,
     },
