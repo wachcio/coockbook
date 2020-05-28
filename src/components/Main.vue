@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <Message />
-        <h1>Książka kucharska</h1>
+        <router-link to="/" class="cookbook_name" exact
+            ><h1>Książka kucharska</h1>
+        </router-link>
+
         <Menu />
         <router-view></router-view>
     </div>
@@ -119,8 +122,13 @@ export default {
     flex-direction: column;
     align-items: center;
 }
+.cookbook_name {
+    text-decoration: none;
+}
 h1 {
     text-align: center;
     margin: 1em 0;
+
+    color: $fontColor;
 }
 </style>
