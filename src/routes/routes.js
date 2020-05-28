@@ -2,9 +2,9 @@ import Home from './../components/Home.vue';
 import RecipeDetail from './../components/recipes/RecipeDetails.vue';
 import RecipeEdit from './../components/recipes/RecipeEdit.vue';
 import RecipeAdd from './../components/recipes/RecipeAdd.vue';
-import CategoriesList from './../components/recipes/CategoriesList.vue';
-import CategoriesEdit from './../components/recipes/CategoriesEdit.vue';
-import CategoriesAdd from './../components/recipes/CategoriesAdd.vue';
+import CategoriesList from './../components/categories/CategoriesList.vue';
+import CategoriesEdit from './../components/categories/CategoriesEdit.vue';
+import CategoriesAdd from './../components/categories/CategoriesAdd.vue';
 export default [
     {
         path: '/',
