@@ -29,13 +29,22 @@
                 :name="`category_${category.category_name}`"
                 :id="`category_${category.category_name}`"
                 v-model="inputText"
+                @keyup.enter="
+                    inputText != category.category_name
+                        ? updateCategories()
+                        : (editMode = false)
+                "
             />
             <div class="categories_modifications__btn">
                 <font-awesome-icon
                     class="categories_modifications__btn--ok"
                     icon="check"
                     size="lg"
-                    @click="updateCategories()"
+                    @click="
+                        inputText != category.category_name
+                            ? updateCategories()
+                            : (editMode = false)
+                    "
                 />
                 <div class="categories_modifications__btn--back">
                     <font-awesome-icon
@@ -91,6 +100,7 @@ export default {
             this.$store.dispatch('getCategoriesJSON');
             // this.$store.dispatch('getRecipesByCategoryJSON');
             // this.$router.push({ name: 'home' });
+            this.editMode = false;
         },
     },
     computed: {
