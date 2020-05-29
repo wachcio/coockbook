@@ -91,6 +91,7 @@ export default {
         justify-content: flex-end;
         width: auto;
         margin-left: 1em;
+        align-items: center;
         &--delete {
             margin-left: 0.2em;
             color: red;
