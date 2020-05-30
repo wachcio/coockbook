@@ -101,17 +101,16 @@ export default {
         async deleteCategory() {
             this.$dialog
                 .confirm(
-                    `Czy na pewno chcesz usunąć '${this.category.category_name}'?`
+                    `Czy na pewno chcesz usunąć '${this.category.category_name}'? Pamiętaj, że mogą do niej należeć już jakieś przepisy.`
                 )
                 .then(async () => {
-                    // await this.$store.dispatch(
-                    //     'deleteCategory',
-                    //     this.category.ID
-                    // );
-                    await console.log(this.operationStatus.statusCode);
+                    await this.$store.dispatch(
+                        'deleteCategory',
+                        this.category.ID
+                    );
+                    console.log(this.operationStatus.statusCode);
 
                     this.$store.dispatch('getCategoriesJSON');
-                    this.$router.push({ name: 'categoriesList' });
                 })
                 .catch(function() {
                     console.log('Clicked on cancel');
@@ -126,6 +125,7 @@ export default {
             'recipesByCategory',
             'categories',
             'categoriesID',
+            'operationStatus',
         ]),
         ...mapGetters([]),
         isLoaded() {
