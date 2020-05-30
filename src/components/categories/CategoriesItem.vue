@@ -17,7 +17,7 @@
                     <font-awesome-icon
                         icon="trash"
                         size="lg"
-                        @click="deleteCategories()"
+                        @click="deleteCategory()"
                     />
                 </div>
             </div>
@@ -94,13 +94,28 @@ export default {
                 category_name: this.inputText,
             });
 
-            // console.log('category', category);
-            // console.log('input', this.inputText);
-
             this.$store.dispatch('getCategoriesJSON');
-            // this.$store.dispatch('getRecipesByCategoryJSON');
             // this.$router.push({ name: 'home' });
             this.editMode = false;
+        },
+        async deleteCategory() {
+            this.$dialog
+                .confirm(
+                    `Czy na pewno chcesz usunąć '${this.category.category_name}'?`
+                )
+                .then(async () => {
+                    // await this.$store.dispatch(
+                    //     'deleteCategory',
+                    //     this.category.ID
+                    // );
+                    await console.log(this.operationStatus.statusCode);
+
+                    this.$store.dispatch('getCategoriesJSON');
+                    this.$router.push({ name: 'categoriesList' });
+                })
+                .catch(function() {
+                    console.log('Clicked on cancel');
+                });
         },
     },
     computed: {
