@@ -161,6 +161,7 @@ ol {
 .recipe_details {
     width: 95%;
     padding: 15px;
+    min-width: 250px;
 
     border-radius: 21px;
     background: #ffd024;
