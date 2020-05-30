@@ -17,6 +17,19 @@
                     size="lg"
                     @click="addCategory()"
                 />
+                <router-link
+                    :to="{
+                        name: 'categoriesList',
+                    }"
+                    class="category_add__btn--cancel"
+                    exact
+                >
+                    <font-awesome-icon
+                        icon="reply"
+                        size="lg"
+                        class="category_add__btn--cancel"
+                    />
+                </router-link>
             </div>
         </div>
     </div>
@@ -102,8 +115,20 @@ export default {
         &--ok {
             margin-left: 0.2em;
             color: darkgreen;
+            opacity: 0.5;
             transition: 0.2s opacity;
             &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+        &--cancel {
+            margin-left: 0.2em;
+            color: red;
+            opacity: 0.5;
+            transition: 0.2s opacity;
+            &:hover {
+                opacity: 1;
                 cursor: pointer;
             }
         }
