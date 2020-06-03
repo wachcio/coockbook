@@ -225,7 +225,4 @@ export default {
 <style lang="scss" scoped>
 @import './../../style/main.scss';
 @import './../../style/recipes/recipes.scss';
-h2 {
-    text-align: center;
-}
 </style>
