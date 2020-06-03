@@ -63,7 +63,10 @@ export default {
             await this.$store.dispatch('addCategory', this.inputText);
 
             await this.$store.dispatch('getCategoriesJSON');
-            await this.$router.push({ name: 'categoriesList' });
+
+            if (this.operationStatus.type != 'error') {
+                await this.$router.push({ name: 'categoriesList' });
+            }
         },
     },
     computed: {

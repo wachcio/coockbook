@@ -13,7 +13,7 @@
             <Editor
                 class="recipe_details__description"
                 initialEditType="wysiwyg"
-                height="100px"
+                height="150px"
                 :initialValue="recipe.description"
                 :options="editorOptions"
                 ref="editorDescription"
@@ -162,7 +162,9 @@ export default {
 
             this.$store.dispatch('getRecipesJSON');
             this.$store.dispatch('getRecipesByCategoryJSON');
-            this.$router.push({ name: 'home' });
+            if (this.operationStatus.type != 'error') {
+                this.$router.push({ name: 'home' });
+            }
         },
         cancelHandle() {
             this.$router.push({ name: 'home' });
@@ -222,90 +224,8 @@ export default {
 
 <style lang="scss" scoped>
 @import './../../style/main.scss';
-
-@mixin paragraphTitle($title) {
-    margin-top: 4em;
-    &::before {
-        content: $title;
-
-        display: block;
-        position: relative;
-        width: 100%;
-        text-transform: uppercase;
-        font-size: 1.5em;
-        top: 0em;
-        left: 0;
-        text-align: center;
-        margin: 0.5em 0;
-        border-bottom: darken($color: $primaryColor, $amount: 30) 2px solid;
-    }
-}
-
-.recipe_details {
-    width: 95%;
-    padding: 15px;
-
-    border-radius: 21px;
-    background: #ffd024;
-    box-shadow: inset 7px 7px 15px #ebbf21, inset -7px -7px 15px #ffe127;
-
-    p {
-        padding-top: 2em;
-        text-align: justify;
-
-        &::first-letter {
-            text-transform: uppercase;
-        }
-    }
-    &__name {
-        @include paragraphTitle('Tytuł');
-    }
-    &__description {
-        @include paragraphTitle('Opis');
-    }
-
-    &__ingredients {
-        @include paragraphTitle('Składniki');
-    }
-    &__execution {
-        @include paragraphTitle('Wykonanie');
-    }
-
-    &__categories {
-        @include paragraphTitle('Kategorie');
-    }
-    &__rating {
-        position: relative;
-        bottom: auto;
-        padding: 2em 0 1em 0;
-    }
-
-    &__btn {
-        display: flex;
-        justify-content: space-around;
-        padding-top: 1em;
-        padding-bottom: 3em;
-    }
-    &__btn_save,
-    &__btn_cancel {
-        display: inline;
-        color: white;
-        border-radius: 6px;
-        background: linear-gradient(145deg, #008900, #007300);
-        box-shadow: 3px 3px 7px #007c00, -3px -3px 7px #008400;
-        padding: 0.3em;
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-    &__btn_cancel {
-        border-radius: 6px;
-        background: linear-gradient(145deg, #ff0000, #e60000);
-        box-shadow: 3px 3px 7px #f70000, -3px -3px 7px #ff0000;
-    }
-}
-li {
-    margin-left: 2em;
+@import './../../style/recipes/recipes.scss';
+h2 {
+    text-align: center;
 }
 </style>
