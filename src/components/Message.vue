@@ -47,11 +47,10 @@ export default {
         ]),
         ...mapGetters([]),
         messageInfo() {
-            // console.log(this.operationStatus.statusCode);
+            console.log(this.operationStatus);
 
             if (
-                this.operationStatus.statusCode !== 400 ||
-                this.operationStatus.statusCode !== 404 ||
+                this.operationStatus.statusCode <= 300 ||
                 Object.keys(this.operationStatus).length === 0
             )
                 return {
@@ -69,7 +68,7 @@ export default {
     created() {},
     watch: {
         operationStatus() {
-            console.log('watch');
+            // console.log('watch');
 
             this.messageVisible = true;
             setTimeout(() => {
