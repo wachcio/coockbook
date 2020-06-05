@@ -1,5 +1,6 @@
 <template>
-    <div class="recipe_details" v-if="isLogged && isAdmin">
+    <!-- <div class="recipe_details" v-if="isLogged && isAdmin"> -->
+    <div class="recipe_details">
         <div v-if="recipe">
             <Editor
                 class="recipe_details__name"

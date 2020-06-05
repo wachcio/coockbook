@@ -46,6 +46,20 @@ const router = new VueRouter({
     // mode: 'history',
     routes,
 });
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth) {
+        //need to login
+        if (!store.getters.isAdmin) {
+            next({
+                name: 'home',
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
 
 Vue.component('vue-markdown', VueMarkdown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);

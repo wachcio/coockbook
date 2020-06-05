@@ -6,6 +6,7 @@ import RecipeAdd from './../components/recipes/RecipeAdd.vue';
 import CategoriesList from './../components/categories/CategoriesList.vue';
 import CategoriesEdit from './../components/categories/CategoriesEdit.vue';
 import CategoriesAdd from './../components/categories/CategoriesAdd.vue';
+
 export default [
     {
         path: '/',
@@ -34,6 +35,7 @@ export default [
         name: 'recipeEdit',
         component: RecipeEdit,
         props: true,
+        meta: { requiresAuth: true },
     },
     {
         path: '/categories',
@@ -46,11 +48,13 @@ export default [
         name: 'categoriesAdd',
         component: CategoriesAdd,
         props: true,
+        meta: { requiresAuth: true },
     },
     {
         path: '/categories/edit/:slug',
         name: 'categoriesEdit',
         component: CategoriesEdit,
         props: true,
+        meta: { requiresAuth: true },
     },
 ];
