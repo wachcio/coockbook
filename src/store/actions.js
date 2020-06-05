@@ -176,5 +176,13 @@ export default {
                 context.commit('addOperationStatus', errorResponse(e));
             });
     },
-    // },
+    login({ commit }, credentials) {
+        return axios.post('/login', credentials).then(({ data }) => {
+            commit('setUserData', data);
+        });
+    },
+
+    logout({ commit }) {
+        commit('clearUserData');
+    },
 };

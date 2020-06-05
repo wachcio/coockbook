@@ -14,4 +14,5 @@ export default {
     categoriesID: {},
     recipesByCategoryID: {},
     operationStatus: {},
+    user: null,
 };

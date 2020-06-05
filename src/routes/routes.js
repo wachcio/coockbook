@@ -1,4 +1,5 @@
 import Home from './../components/Home.vue';
+import Login from './../components/Login.vue';
 import RecipeDetail from './../components/recipes/RecipeDetails.vue';
 import RecipeEdit from './../components/recipes/RecipeEdit.vue';
 import RecipeAdd from './../components/recipes/RecipeAdd.vue';
@@ -10,6 +11,11 @@ export default [
         path: '/',
         name: 'home',
         component: Home,
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login,
     },
     {
         path: '/recipe/add',

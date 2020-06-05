@@ -154,7 +154,13 @@ export default {
         ]),
         ...mapGetters([]),
     },
-    created() {},
+    created() {
+        const userInfo = localStorage.getItem('user');
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            this.$store.commit('setUserData', userData);
+        }
+    },
     watch: {},
 };
 </script>

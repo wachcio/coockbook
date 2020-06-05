@@ -9,6 +9,9 @@ axios.defaults.headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
+    common: {
+        Authorization: '',
+    },
     // 'X-CSRF-TOKEN': 'meta[name="csrf-token"]'.attr('content'),
 };
 

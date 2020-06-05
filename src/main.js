@@ -4,6 +4,7 @@ import App from './App.vue';
 import 'es6-promise/auto';
 import routes from './routes/routes.js';
 import store from './store/store.js';
+import axios from 'axios';
 import VueMarkdown from 'vue-markdown';
 
 import VuejsDialog from 'vuejs-dialog';
@@ -58,6 +59,22 @@ Vue.config.productionTip = false;
 
 new Vue({
     store,
+    created() {
+        const userInfo = localStorage.getItem('user');
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            this.$store.commit('setUserData', userData);
+        }
+        axios.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response.status === 401) {
+                    this.$store.dispatch('logout');
+                }
+                return Promise.reject(error);
+            }
+        );
+    },
     router,
     components: {
         VueMarkdown,

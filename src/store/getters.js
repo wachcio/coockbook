@@ -8,4 +8,5 @@ export default {
     //       sensorName: "Prędkość wiatru km/h"
     //    });
     // }
+    isLogged: (state) => !!state.user,
 };
