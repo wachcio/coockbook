@@ -1,9 +1,14 @@
 <template>
     <div class="container">
         <Message />
-        <router-link to="/login" v-if="!isLogged">Login</router-link>
-        <button type="button" @click="logout()" v-if="isLogged">Logout</button>
-        <router-link to="/" class="cookbook_name" exact
+        <router-link :to="{ name: 'login' }" v-if="!isLogged" class="login_btn"
+            >Zaloguj się</router-link
+        >
+        <p v-if="isLogged">Witaj {{ user.user.name }}!</p>
+        <div @click="logout()" v-if="isLogged" class="logout_btn">
+            Wyloguj się
+        </div>
+        <router-link :to="{ name: 'home' }" class="cookbook_name" exact
             ><h1>Książka kucharska</h1>
         </router-link>
 
@@ -136,5 +141,19 @@ h1 {
     margin: 1em 0;
 
     color: $fontColor;
+}
+
+.logout_btn,
+.login_btn {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    outline: none;
+    text-decoration: none;
+    color: $fontColor;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 </style>
