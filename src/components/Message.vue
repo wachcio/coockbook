@@ -47,7 +47,7 @@ export default {
         ]),
         ...mapGetters([]),
         messageInfo() {
-            console.log(this.operationStatus);
+            // console.log(this.operationStatus);
 
             if (
                 this.operationStatus.statusCode <= 300 ||
