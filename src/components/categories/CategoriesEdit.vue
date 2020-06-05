@@ -37,7 +37,7 @@ export default {
             'categoriesID',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
     },
     created() {},
     watch: {},

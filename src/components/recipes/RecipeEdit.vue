@@ -1,5 +1,5 @@
 <template>
-    <div class="recipe_details">
+    <div class="recipe_details" v-if="isLogged && isAdmin">
         <div v-if="recipe">
             <Editor
                 class="recipe_details__name"
@@ -181,7 +181,7 @@ export default {
             'operationStatus',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
         getCategories() {
             return this.recipe.categories
                 .map((category) => {

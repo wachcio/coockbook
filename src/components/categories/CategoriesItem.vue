@@ -6,14 +6,20 @@
             @dblclick="editMode = true"
         >
             <p>{{ category.category_name }}</p>
-            <div class="categories_modifications__btn">
+            <div
+                v-if="isLogged && isAdmin"
+                class="categories_modifications__btn"
+            >
                 <font-awesome-icon
                     class="categories_modifications__btn--edit"
                     icon="pen"
                     size="lg"
                     @click="editMode = true"
                 />
-                <div class="categories_modifications__btn--delete">
+                <div
+                    v-if="isLogged && isAdmin"
+                    class="categories_modifications__btn--delete"
+                >
                     <font-awesome-icon
                         icon="trash"
                         size="lg"
@@ -128,7 +134,7 @@ export default {
             'operationStatus',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
         isLoaded() {
             if (this.categories.length) return true;
             else return false;

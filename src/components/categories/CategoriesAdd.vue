@@ -1,5 +1,5 @@
 <template>
-    <div class="category_wrapper">
+    <div class="category_wrapper" v-if="isLogged && isAdmin">
         <h2>Podaj nazwę kategorii</h2>
         <div class="category_add">
             <input
@@ -80,7 +80,7 @@ export default {
             'operationStatus',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
     },
     created() {},
     watch: {},

@@ -153,7 +153,7 @@ export default {
             'categoriesID',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
     },
     created() {
         const userInfo = localStorage.getItem('user');

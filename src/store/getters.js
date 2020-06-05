@@ -1,12 +1,11 @@
+import _ from 'lodash';
+
 export default {
-    // szablon funkcji
-    //    funkcja(message) {
-    //   return state.message;
-    //    }
-    // winSpeedIndex(state) {
-    //    return _.findIndex(state.sensorsCurrent, {
-    //       sensorName: "Prędkość wiatru km/h"
-    //    });
-    // }
     isLogged: (state) => !!state.user,
+    isAdmin: (state) => {
+        if (_.has(state.user, 'user')) {
+            return !!state.user.user.is_admin;
+        }
+        return false;
+    },
 };

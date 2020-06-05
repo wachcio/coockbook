@@ -2,6 +2,7 @@
     <div class="container">
         <Message />
         <router-link to="/login" v-if="!isLogged">Login</router-link>
+        <button type="button" @click="logout()" v-if="isLogged">Logout</button>
         <router-link to="/" class="cookbook_name" exact
             ><h1>Książka kucharska</h1>
         </router-link>
@@ -81,6 +82,9 @@ export default {
             this.$store.dispatch('addRecipes', this.newRecipes);
             this.refreshData('categories');
         },
+        logout() {
+            this.$store.dispatch('logout');
+        },
         // getCategoryIDFromCategotiesArray() {
         //     if (this.filters.category == 'all') {
         //         this.filters.categoryID = -1;
@@ -106,7 +110,7 @@ export default {
             'categoriesID',
             'user',
         ]),
-        ...mapGetters(['isLogged', 'user']),
+        ...mapGetters(['isLogged', 'isAdmin']),
     },
     created() {
         this.refreshData();

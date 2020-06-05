@@ -4,6 +4,7 @@
             <H1 class="recipe_details__name">{{ recipe.name }}</H1>
             <div class="recipe_details__modifications">
                 <router-link
+                    v-if="isLogged && isAdmin"
                     :to="{
                         name: 'recipeEdit',
                         params: { slug: getSlug, recipe: recipe },
@@ -16,6 +17,7 @@
                     />
                 </router-link>
                 <font-awesome-icon
+                    v-if="isLogged && isAdmin"
                     class="recipe_details__modifications--delete"
                     icon="trash"
                     size="lg"
@@ -110,7 +112,7 @@ export default {
             'operationStatus',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
         getCategories() {
             return this.recipe.categories
                 .map((category) => {

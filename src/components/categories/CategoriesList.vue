@@ -1,6 +1,7 @@
 <template>
     <div>
         <router-link
+            v-if="isLogged && isAdmin"
             :to="{
                 name: 'categoriesAdd',
             }"
@@ -62,7 +63,7 @@ export default {
             'categoriesID',
             'user',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'isAdmin']),
         isLoaded() {
             if (this.categories.length) return true;
             else return false;
