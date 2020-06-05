@@ -47,8 +47,11 @@ export default {
         ]),
         ...mapGetters([]),
         messageInfo() {
+            // console.log(this.operationStatus.statusCode);
+
             if (
                 this.operationStatus.statusCode !== 400 ||
+                this.operationStatus.statusCode !== 404 ||
                 Object.keys(this.operationStatus).length === 0
             )
                 return {

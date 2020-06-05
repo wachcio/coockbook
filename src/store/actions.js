@@ -176,11 +176,23 @@ export default {
                 context.commit('addOperationStatus', errorResponse(e));
             });
     },
-    login({ commit }, credentials) {
-        return axios.post('/login', credentials).then(({ data }) => {
-            commit('setUserData', data);
-        });
+    login(context, credentials) {
+        return axios
+            .post('/login', credentials)
+            .then(({ data }) => {
+                context.commit('setUserData', data);
+                return data;
+            })
+            .catch((e) => {
+                context.commit('addOperationStatus', errorResponse(e));
+                return e;
+            });
     },
+    // login(context, credentials) {
+    //     return axios.post('/login', credentials).then(({ data }) => {
+    //         context.commit('setUserData', data);
+    //     });
+    // },
 
     logout({ commit }) {
         commit('clearUserData');
