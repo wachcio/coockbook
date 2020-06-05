@@ -104,6 +104,7 @@ export default {
             'recipesByCategoryID',
             'categories',
             'categoriesID',
+            'user',
         ]),
         ...mapGetters(['isLogged', 'user']),
     },

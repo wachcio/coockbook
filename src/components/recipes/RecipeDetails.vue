@@ -108,6 +108,7 @@ export default {
             'categories',
             'categoriesID',
             'operationStatus',
+            'user',
         ]),
         ...mapGetters([]),
         getCategories() {

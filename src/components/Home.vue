@@ -151,6 +151,7 @@ export default {
             'recipesByCategoryID',
             'categories',
             'categoriesID',
+            'user',
         ]),
         ...mapGetters([]),
     },

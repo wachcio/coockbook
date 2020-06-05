@@ -46,6 +46,7 @@ export default {
             'recipesByCategory',
             'categories',
             'categoriesID',
+            'user',
         ]),
         ...mapGetters([]),
         isLoaded() {

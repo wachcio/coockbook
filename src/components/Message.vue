@@ -42,8 +42,8 @@ export default {
             'recipesByCategory',
             'categories',
             'categoriesID',
-
             'operationStatus',
+            'user',
         ]),
         ...mapGetters([]),
         messageInfo() {
