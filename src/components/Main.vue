@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <Message />
+        <router-link to="/login" v-if="!isLogged">Login</router-link>
         <router-link to="/" class="cookbook_name" exact
             ><h1>Książka kucharska</h1>
         </router-link>
@@ -104,10 +105,10 @@ export default {
             'categories',
             'categoriesID',
         ]),
-        ...mapGetters([]),
+        ...mapGetters(['isLogged', 'user']),
     },
     created() {
-        this.refreshData('aaa');
+        this.refreshData();
     },
     watch: {},
 };
