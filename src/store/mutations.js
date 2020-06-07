@@ -61,6 +61,9 @@ export default {
             common: {
                 Authorization: `Bearer ${userData.token}`,
                 // 'X-CSRF-TOKEN': userData.token,
+                // 'X-CSRF-TOKEN': document
+                //     .querySelector('meta[name="csrf-token"]')
+                //     .getAttribute('content'),
             },
         };
     },

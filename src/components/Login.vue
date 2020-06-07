@@ -16,6 +16,7 @@
                 v-model="password"
                 placeholder="password"
             />
+            <!-- <input type="hidden" name="_token" :value="csrf" /> -->
             <button class="login__btn" type="submit">
                 <font-awesome-icon
                     class="login__btn--ok"
@@ -33,6 +34,9 @@ export default {
         return {
             email: '',
             password: '',
+            // csrf: document
+            //     .querySelector('meta[name="csrf-token"]')
+            //     .getAttribute('content'),
         };
     },
 

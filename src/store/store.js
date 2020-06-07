@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 // import _ from 'lodash';
 
-// axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/';
+// axios.defaults.baseURL = 'https://cookbookapi.wachcio.pl/api';
 axios.defaults.baseURL = 'http://localhost:8000/api/';
 axios.defaults.headers = {
     Accept: 'application/json',
