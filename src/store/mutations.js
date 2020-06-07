@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import axios from 'axios';
 export default {
     // mutations: {
@@ -44,9 +45,24 @@ export default {
         return state.operationStatus;
     },
     setUserData(state, userData) {
+        // console.log(document.head.querySelector('meta[name="csrf-token"]'));
+
+        console.log(Vue.$cookies.get('XSRF-TOKEN'));
+        console.log(Vue.$cookies.get('cookbook_session'));
+
         state.user = userData;
         localStorage.setItem('user', JSON.stringify(userData));
-        axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
+        // axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
+        // axios.defaults.headers.common.X-CSRF-TOKEN = userData.token;
+        axios.defaults.headers = {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            common: {
+                Authorization: `Bearer ${userData.token}`,
+                // 'X-CSRF-TOKEN': userData.token,
+            },
+        };
     },
 
     clearUserData() {

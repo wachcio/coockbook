@@ -5,6 +5,7 @@ import 'es6-promise/auto';
 import routes from './routes/routes.js';
 import store from './store/store.js';
 import axios from 'axios';
+import VueCookies from 'vue-cookies';
 import VueMarkdown from 'vue-markdown';
 
 import VuejsDialog from 'vuejs-dialog';
@@ -68,6 +69,7 @@ Vue.use(VuejsDialog, {
     okText: 'Usuń',
     cancelText: 'Anuluj',
 });
+Vue.use(VueCookies);
 
 Vue.config.productionTip = false;
 
