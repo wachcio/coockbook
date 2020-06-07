@@ -71,6 +71,9 @@ Vue.use(VuejsDialog, {
 });
 Vue.use(VueCookies);
 
+import { config } from '../config';
+Vue.prototype.appConfig = config;
+
 Vue.config.productionTip = false;
 
 new Vue({
